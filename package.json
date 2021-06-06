@@ -6,6 +6,7 @@
     "@hanul/skynode": "^0.0.2",
     "ethers": "^5.0.32",
     "less": "^4.1.1",
+    "skyrouter": "^0.0.1",
     "skyutil": "^0.0.1"
   },
   "devDependencies": {
