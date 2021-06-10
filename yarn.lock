@@ -372,14 +372,14 @@
   resolved "https://registry.yarnpkg.com/@hanul/debouncer/-/debouncer-0.0.1.tgz#0c7b0242e6c54c02ea74a2939c529de6845c1235"
   integrity sha512-i5oU9vqA4bWHfleEGnykDH92q4Dtu1qmY1enn3cFlojEiSQFf7l1wrYjaYlN2kqkXRpXn4a/iEjWWPDtl5gJJg==
 
-"@hanul/skynode@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@hanul/skynode/-/skynode-0.0.2.tgz#809d9a46659be963ff204a0cd6f248a8a74f024d"
-  integrity sha512-CBXHzKAwV7W7j4m9YTzMvXB9W0NA0o1oFqKIO8ZwIJaNKPxURDGzRVAikI/l3XWjVU2/+YwExO6Dgz+TEjJGDA==
+"@hanul/skynode@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@hanul/skynode/-/skynode-0.0.6.tgz#0b78595ff0057c2129ec1b44e0531c70b80873aa"
+  integrity sha512-BPKJ2iHsOw1C4UxI5DoY83fxxWg+QL3rAGO+dKz+O/JRNvVUhNgQXwtXGXaxt5vPip784n+UsrXaDKeNKyx3xQ==
   dependencies:
     "@hanul/debouncer" "^0.0.1"
-    eventcontainer "^0.0.2"
-    skyutil "^0.0.1"
+    eventcontainer "^0.0.3"
+    skyutil "^0.0.3"
 
 "@types/eslint-scope@^3.7.0":
   version "3.7.0"
@@ -939,10 +939,12 @@ ethers@^5.0.32:
     "@ethersproject/web" "5.3.0"
     "@ethersproject/wordlists" "5.3.0"
 
-eventcontainer@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/eventcontainer/-/eventcontainer-0.0.2.tgz#603bcc333ba9be0e8477ffa18a1c17b273e00c4c"
-  integrity sha512-0BY6T0iIVvoSE/9kVTIp0T8EKCa0+hJ+VS0AvtQU1OCkxS5H8m3jV2UI1cf/az3m9+ny+DipiDKIkAe4l19D9Q==
+eventcontainer@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/eventcontainer/-/eventcontainer-0.0.3.tgz#4dfcd7eba3ee34ddc0ec167d3b9a67880d6ad759"
+  integrity sha512-6O9dI4wrz3MXIeEn5zNP19sPjGNzWaHntEZ22T0nVvOjRwhxAXJGmFF75RihNwj6eKp+5NNYQLTS4ond3XOC3w==
+  dependencies:
+    skyutil "^0.0.1"
 
 events@^3.2.0:
   version "3.3.0"
