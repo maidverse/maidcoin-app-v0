@@ -10,3 +10,8 @@ SkyRouter.route("", Home);
 SkyRouter.route("maid", Maid);
 SkyRouter.route("earn", Earn);
 SkyRouter.route("nurse", Nurse);
+
+if (sessionStorage.__spa_path) {
+    SkyRouter.go(sessionStorage.__spa_path);
+    sessionStorage.removeItem('__spa_path');
+}
