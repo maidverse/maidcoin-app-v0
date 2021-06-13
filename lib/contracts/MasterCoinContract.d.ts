@@ -1,0 +1,1 @@
+//# sourceMappingURL=MasterCoinContract.d.ts.map

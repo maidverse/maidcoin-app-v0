@@ -1,0 +1,1 @@
+//# sourceMappingURL=MaidCoinContract.d.ts.map

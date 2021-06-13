@@ -3,7 +3,7 @@
     "webpack": "webpack --mode development --watch --config webpack.config.js"
   },
   "dependencies": {
-    "@hanul/skynode": "^0.0.6",
+    "@hanul/skynode": "^0.0.7",
     "ethers": "^5.0.32",
     "less": "^4.1.1",
     "skyrouter": "^0.0.1",
