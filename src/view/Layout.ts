@@ -14,6 +14,9 @@ export default class Layout implements View {
         Layout.current = this;
         BodyNode.append(this.container = el("#layout",
             el("header",
+                el("h1",
+                    el("a", el("img.logo", { src: "/images/logo.png" }), { click: () => SkyRouter.go("/") }),
+                ),
                 el("nav",
                     el("a", "Home", { click: () => SkyRouter.go("/") }),
                     el("a", "Maid", { click: () => SkyRouter.go("/maid") }),

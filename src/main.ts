@@ -1,4 +1,5 @@
 import { SkyRouter } from "skyrouter";
+import CloneNurseContract from "./contracts/CloneNurseContract";
 import Earn from "./view/Earn";
 import Home from "./view/Home";
 import Layout from "./view/Layout";
@@ -15,3 +16,5 @@ if (sessionStorage.__spa_path) {
     SkyRouter.go(sessionStorage.__spa_path);
     sessionStorage.removeItem('__spa_path');
 }
+
+CloneNurseContract
