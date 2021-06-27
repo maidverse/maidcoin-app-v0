@@ -1,15 +1,15 @@
 declare const _default: {
+    infuraId: string;
     rpc: string;
     contracts: {
-        Ratio: string;
+        LPToken: string;
         MaidCoin: string;
-        MasterCoin: string;
+        TheMaster: string;
         Maid: string;
-        MaidCorp: string;
+        MasterCoin: string;
         NursePart: string;
         NurseRaid: string;
         CloneNurse: string;
-        LPToken: string;
     };
 };
 export default _default;

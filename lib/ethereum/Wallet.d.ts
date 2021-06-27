@@ -2,12 +2,14 @@ import { ethers } from "ethers";
 import EventContainer from "eventcontainer";
 declare class Wallet extends EventContainer {
     private ethereum;
-    get existsProvider(): boolean;
-    provider: ethers.providers.Web3Provider | undefined;
-    signer: ethers.providers.JsonRpcSigner | undefined;
+    get existsInjectedProvider(): boolean;
+    private walletConnectProvider;
+    provider: ethers.providers.Web3Provider;
+    signer: ethers.providers.JsonRpcSigner;
     constructor();
+    private checkConnected;
     loadAddress(): Promise<string | undefined>;
-    loadChainId(): Promise<number | undefined>;
+    loadChainId(): Promise<number>;
     connected(): Promise<boolean>;
     connect(): Promise<void>;
 }

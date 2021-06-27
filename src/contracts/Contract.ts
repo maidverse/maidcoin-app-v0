@@ -1,21 +1,29 @@
-import { ethers } from "ethers";
+import { ContractInterface, ethers } from "ethers";
 import EventContainer from "eventcontainer";
 import NetworkProvider from "../ethereum/NetworkProvider";
 import Wallet from "../ethereum/Wallet";
 
-export default abstract class Contract extends EventContainer {
+export default abstract class Contract<CT extends ethers.Contract> extends EventContainer {
 
-    protected walletContract: ethers.Contract | undefined;
-    protected contract: ethers.Contract;
+    private walletContract: CT | undefined;
+    protected contract: CT;
 
-    constructor(private address: string, private abi: string) {
+    constructor(private address: string, private abi: ContractInterface, eventNames: string[]) {
         super();
-        this.contract = new ethers.Contract(address, abi, NetworkProvider.provider).connect(NetworkProvider.signer);
+        this.contract = new ethers.Contract(address, abi, NetworkProvider.provider).connect(NetworkProvider.signer) as CT;
+        for (const eventName of eventNames) {
+            this.contract.on(eventName, (...args) => {
+                this.fireEvent(eventName, ...args);
+            });
+        }
     }
 
     public async loadWalletContract() {
+        if (await Wallet.connected() !== true) {
+            await Wallet.connect();
+        }
         if (this.walletContract === undefined && Wallet.signer !== undefined) {
-            this.walletContract = new ethers.Contract(this.address, this.abi, Wallet.provider).connect(Wallet.signer);
+            this.walletContract = new ethers.Contract(this.address, this.abi, Wallet.provider).connect(Wallet.signer) as CT;
         }
         return this.walletContract;
     }
