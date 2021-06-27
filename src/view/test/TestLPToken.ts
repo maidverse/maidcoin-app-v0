@@ -17,10 +17,10 @@ export default class TestLPToken implements View {
             this.info = el(".info"),
             el(".control",
                 el("a.mint-button", "Mint", {
-                    click: () => {
+                    click: async () => {
                         const amount = prompt("How much amount to mint?", "10");
                         if (amount) {
-                            TestLPTokenContract.mint(utils.parseEther(amount));
+                            await TestLPTokenContract.mint(utils.parseEther(amount));
                         }
                     },
                 }),

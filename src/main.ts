@@ -1,4 +1,5 @@
 import { SkyRouter } from "skyrouter";
+import Admin from "./view/Admin";
 import Earn from "./view/Earn";
 import Home from "./view/Home";
 import Layout from "./view/Layout";
@@ -11,6 +12,7 @@ SkyRouter.route("", Home);
 SkyRouter.route("maid", Maid);
 SkyRouter.route("earn", Earn);
 SkyRouter.route("nurse", Nurse);
+SkyRouter.route("admin", Admin);
 
 // test
 SkyRouter.route("test-lp-token", TestLPToken);
