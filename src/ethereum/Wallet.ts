@@ -39,6 +39,9 @@ class Wallet extends EventContainer {
     }
 
     public async loadAddress(): Promise<string | undefined> {
+        if (this.walletConnectProvider?.connected === false) {
+            return undefined;
+        }
         return (await this.provider.listAccounts())[0];
     }
 
