@@ -1,7 +1,7 @@
-import Contract from "./Contract";
-declare class CloneNurseContract extends Contract {
+import ERC721Contract from "./standard/ERC721Contract";
+import { CloneNurse } from "./typechain";
+declare class CloneNurseContract extends ERC721Contract<CloneNurse> {
     constructor();
-    private test;
 }
 declare const _default: CloneNurseContract;
 export default _default;

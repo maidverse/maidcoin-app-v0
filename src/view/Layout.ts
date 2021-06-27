@@ -1,6 +1,7 @@
 import { BodyNode, DomNode, el } from "@hanul/skynode";
-import { View } from "skyrouter";
+import { SkyRouter, View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
+import UserInfo from "../component/UserInfo";
 
 export default class Layout implements View {
 
@@ -12,7 +13,16 @@ export default class Layout implements View {
     constructor() {
         Layout.current = this;
         BodyNode.append(this.container = el("#layout",
-            "Layout",
+            el("header",
+                el("nav",
+                    el("a", "Home", { click: () => SkyRouter.go("/") }),
+                    el("a", "Maid", { click: () => SkyRouter.go("/maid") }),
+                    el("a", "Earn", { click: () => SkyRouter.go("/earn") }),
+                    el("a", "Nurse", { click: () => SkyRouter.go("/nurse") }),
+                ),
+                new UserInfo(),
+                el("a.more-button.fas.fa-ellipsis-h"),
+            ),
             this.content = el("main"),
         ));
     }

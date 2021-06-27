@@ -6500,6 +6500,17 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n
 
 /***/ }),
 
+/***/ "./src/component/UserInfo.ts":
+/*!***********************************!*\
+  !*** ./src/component/UserInfo.ts ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nclass UserInfo extends skynode_1.DomNode {\r\n    constructor() {\r\n        super(\".user-info\");\r\n        this.append(skynode_1.el(\"\", \"User Info\"));\r\n    }\r\n}\r\nexports.default = UserInfo;\r\n\n\n//# sourceURL=webpack:///./src/component/UserInfo.ts?");
+
+/***/ }),
+
 /***/ "./src/contracts/Contract.ts":
 /*!***********************************!*\
   !*** ./src/contracts/Contract.ts ***!
@@ -6511,6 +6522,17 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 /***/ }),
 
+/***/ "./src/contracts/standard/ERC20Contract.ts":
+/*!*************************************************!*\
+  !*** ./src/contracts/standard/ERC20Contract.ts ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst Contract_1 = __importDefault(__webpack_require__(/*! ../Contract */ \"./src/contracts/Contract.ts\"));\r\nclass ERC20Contract extends Contract_1.default {\r\n    constructor(address, abi, eventNames) {\r\n        super(address, abi, eventNames.concat([\r\n            \"Transfer\",\r\n            \"Approval\",\r\n        ]));\r\n    }\r\n    async getTotalSupply() {\r\n        return await this.contract.totalSupply();\r\n    }\r\n    async balanceOf(owner) {\r\n        return await this.contract.balanceOf(owner);\r\n    }\r\n    async transfer(to, amount) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.transfer(to, amount));\r\n    }\r\n    async transferFrom(from, to, amount) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.transferFrom(from, to, amount));\r\n    }\r\n    async approve(spender, amount) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.approve(spender, amount));\r\n    }\r\n    async allowance(owner, spender) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.allowance(owner, spender));\r\n    }\r\n}\r\nexports.default = ERC20Contract;\r\n\n\n//# sourceURL=webpack:///./src/contracts/standard/ERC20Contract.ts?");
+
+/***/ }),
+
 /***/ "./src/contracts/test/TestLPTokenContract.ts":
 /*!***************************************************!*\
   !*** ./src/contracts/test/TestLPTokenContract.ts ***!
@@ -6518,7 +6540,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst Config_1 = __importDefault(__webpack_require__(/*! ../../Config */ \"./src/Config.ts\"));\r\nconst Wallet_1 = __importDefault(__webpack_require__(/*! ../../ethereum/Wallet */ \"./src/ethereum/Wallet.ts\"));\r\nconst TestLPToken_json_1 = __importDefault(__webpack_require__(/*! ../artifacts/contracts/test/TestLPToken.sol/TestLPToken.json */ \"./src/contracts/artifacts/contracts/test/TestLPToken.sol/TestLPToken.json\"));\r\nconst Contract_1 = __importDefault(__webpack_require__(/*! ../Contract */ \"./src/contracts/Contract.ts\"));\r\nclass TestLPTokenContract extends Contract_1.default {\r\n    constructor() {\r\n        super(Config_1.default.contracts.LPToken, TestLPToken_json_1.default.abi, [\r\n            \"Transfer\",\r\n            \"Approval\",\r\n        ]);\r\n    }\r\n    async getTotalSupply() {\r\n        return await this.contract.totalSupply();\r\n    }\r\n    async balanceOf(owner) {\r\n        return await this.contract.balanceOf(owner);\r\n    }\r\n    async transfer(to, amount) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.transfer(to, amount));\r\n    }\r\n    async transferFrom(from, to, amount) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.transferFrom(from, to, amount));\r\n    }\r\n    async approve(spender, amount) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.approve(spender, amount));\r\n    }\r\n    async allowance(owner, spender) {\r\n        const contract = await this.loadWalletContract();\r\n        await (contract === null || contract === void 0 ? void 0 : contract.allowance(owner, spender));\r\n    }\r\n    async mint(amount) {\r\n        const contract = await this.loadWalletContract();\r\n        const owner = await Wallet_1.default.loadAddress();\r\n        if (owner !== undefined) {\r\n            await (contract === null || contract === void 0 ? void 0 : contract.mint(owner, amount));\r\n        }\r\n    }\r\n}\r\nexports.default = new TestLPTokenContract();\r\n\n\n//# sourceURL=webpack:///./src/contracts/test/TestLPTokenContract.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst Config_1 = __importDefault(__webpack_require__(/*! ../../Config */ \"./src/Config.ts\"));\r\nconst Wallet_1 = __importDefault(__webpack_require__(/*! ../../ethereum/Wallet */ \"./src/ethereum/Wallet.ts\"));\r\nconst TestLPToken_json_1 = __importDefault(__webpack_require__(/*! ../artifacts/contracts/test/TestLPToken.sol/TestLPToken.json */ \"./src/contracts/artifacts/contracts/test/TestLPToken.sol/TestLPToken.json\"));\r\nconst ERC20Contract_1 = __importDefault(__webpack_require__(/*! ../standard/ERC20Contract */ \"./src/contracts/standard/ERC20Contract.ts\"));\r\nclass TestLPTokenContract extends ERC20Contract_1.default {\r\n    constructor() {\r\n        super(Config_1.default.contracts.LPToken, TestLPToken_json_1.default.abi, []);\r\n    }\r\n    async mint(amount) {\r\n        const contract = await this.loadWalletContract();\r\n        const owner = await Wallet_1.default.loadAddress();\r\n        if (owner !== undefined) {\r\n            await (contract === null || contract === void 0 ? void 0 : contract.mint(owner, amount));\r\n        }\r\n    }\r\n}\r\nexports.default = new TestLPTokenContract();\r\n\n\n//# sourceURL=webpack:///./src/contracts/test/TestLPTokenContract.ts?");
 
 /***/ }),
 
@@ -6559,10 +6581,10 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /*!****************************!*\
   !*** ./src/view/Layout.ts ***!
   \****************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nclass Layout {\r\n    constructor() {\r\n        Layout.current = this;\r\n        skynode_1.BodyNode.append(this.container = skynode_1.el(\"#layout\", \"Layout\", this.content = skynode_1.el(\"main\")));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Layout;\r\n\n\n//# sourceURL=webpack:///./src/view/Layout.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst skyrouter_1 = __webpack_require__(/*! skyrouter */ \"./node_modules/skyrouter/lib/index.js\");\r\nconst UserInfo_1 = __importDefault(__webpack_require__(/*! ../component/UserInfo */ \"./src/component/UserInfo.ts\"));\r\nclass Layout {\r\n    constructor() {\r\n        Layout.current = this;\r\n        skynode_1.BodyNode.append(this.container = skynode_1.el(\"#layout\", skynode_1.el(\"header\", skynode_1.el(\"nav\", skynode_1.el(\"a\", \"Home\", { click: () => skyrouter_1.SkyRouter.go(\"/\") }), skynode_1.el(\"a\", \"Maid\", { click: () => skyrouter_1.SkyRouter.go(\"/maid\") }), skynode_1.el(\"a\", \"Earn\", { click: () => skyrouter_1.SkyRouter.go(\"/earn\") }), skynode_1.el(\"a\", \"Nurse\", { click: () => skyrouter_1.SkyRouter.go(\"/nurse\") })), new UserInfo_1.default(), skynode_1.el(\"a.more-button.fas.fa-ellipsis-h\")), this.content = skynode_1.el(\"main\")));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Layout;\r\n\n\n//# sourceURL=webpack:///./src/view/Layout.ts?");
 
 /***/ }),
 
