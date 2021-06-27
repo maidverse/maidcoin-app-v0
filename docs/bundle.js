@@ -6584,7 +6584,29 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skyrouter_1 = __webpack_require__(/*! skyrouter */ \"./node_modules/skyrouter/lib/index.js\");\r\nconst Layout_1 = __importDefault(__webpack_require__(/*! ./view/Layout */ \"./src/view/Layout.ts\"));\r\nconst TestLPToken_1 = __importDefault(__webpack_require__(/*! ./view/test/TestLPToken */ \"./src/view/test/TestLPToken.ts\"));\r\nskyrouter_1.SkyRouter.route(\"**\", Layout_1.default);\r\nskyrouter_1.SkyRouter.route(\"test-lp-token\", TestLPToken_1.default);\r\nif (sessionStorage.__spa_path) {\r\n    skyrouter_1.SkyRouter.go(sessionStorage.__spa_path);\r\n    sessionStorage.removeItem('__spa_path');\r\n}\r\n\n\n//# sourceURL=webpack:///./src/main.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skyrouter_1 = __webpack_require__(/*! skyrouter */ \"./node_modules/skyrouter/lib/index.js\");\r\nconst Earn_1 = __importDefault(__webpack_require__(/*! ./view/Earn */ \"./src/view/Earn.ts\"));\r\nconst Home_1 = __importDefault(__webpack_require__(/*! ./view/Home */ \"./src/view/Home.ts\"));\r\nconst Layout_1 = __importDefault(__webpack_require__(/*! ./view/Layout */ \"./src/view/Layout.ts\"));\r\nconst Maid_1 = __importDefault(__webpack_require__(/*! ./view/Maid */ \"./src/view/Maid.ts\"));\r\nconst Nurse_1 = __importDefault(__webpack_require__(/*! ./view/Nurse */ \"./src/view/Nurse.ts\"));\r\nconst TestLPToken_1 = __importDefault(__webpack_require__(/*! ./view/test/TestLPToken */ \"./src/view/test/TestLPToken.ts\"));\r\nskyrouter_1.SkyRouter.route(\"**\", Layout_1.default);\r\nskyrouter_1.SkyRouter.route(\"\", Home_1.default);\r\nskyrouter_1.SkyRouter.route(\"maid\", Maid_1.default);\r\nskyrouter_1.SkyRouter.route(\"earn\", Earn_1.default);\r\nskyrouter_1.SkyRouter.route(\"nurse\", Nurse_1.default);\r\nskyrouter_1.SkyRouter.route(\"test-lp-token\", TestLPToken_1.default);\r\nif (sessionStorage.__spa_path) {\r\n    skyrouter_1.SkyRouter.go(sessionStorage.__spa_path);\r\n    sessionStorage.removeItem('__spa_path');\r\n}\r\n\n\n//# sourceURL=webpack:///./src/main.ts?");
+
+/***/ }),
+
+/***/ "./src/view/Earn.ts":
+/*!**************************!*\
+  !*** ./src/view/Earn.ts ***!
+  \**************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst Layout_1 = __importDefault(__webpack_require__(/*! ./Layout */ \"./src/view/Layout.ts\"));\r\nclass Earn {\r\n    constructor() {\r\n        Layout_1.default.current.content.append(this.container = skynode_1.el(\"#earn\", \"Earn!\"));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Earn;\r\n\n\n//# sourceURL=webpack:///./src/view/Earn.ts?");
+
+/***/ }),
+
+/***/ "./src/view/Home.ts":
+/*!**************************!*\
+  !*** ./src/view/Home.ts ***!
+  \**************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst Layout_1 = __importDefault(__webpack_require__(/*! ./Layout */ \"./src/view/Layout.ts\"));\r\nclass Home {\r\n    constructor() {\r\n        Layout_1.default.current.content.append(this.container = skynode_1.el(\"#home\", \"Home!\"));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Home;\r\n\n\n//# sourceURL=webpack:///./src/view/Home.ts?");
 
 /***/ }),
 
@@ -6595,7 +6617,29 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst skyrouter_1 = __webpack_require__(/*! skyrouter */ \"./node_modules/skyrouter/lib/index.js\");\r\nconst UserInfo_1 = __importDefault(__webpack_require__(/*! ../component/UserInfo */ \"./src/component/UserInfo.ts\"));\r\nclass Layout {\r\n    constructor() {\r\n        Layout.current = this;\r\n        skynode_1.BodyNode.append(this.container = skynode_1.el(\"#layout\", skynode_1.el(\"header\", skynode_1.el(\"nav\", skynode_1.el(\"a\", \"Home\", { click: () => skyrouter_1.SkyRouter.go(\"/\") }), skynode_1.el(\"a\", \"Maid\", { click: () => skyrouter_1.SkyRouter.go(\"/maid\") }), skynode_1.el(\"a\", \"Earn\", { click: () => skyrouter_1.SkyRouter.go(\"/earn\") }), skynode_1.el(\"a\", \"Nurse\", { click: () => skyrouter_1.SkyRouter.go(\"/nurse\") })), new UserInfo_1.default(), skynode_1.el(\"a.more-button.fas.fa-ellipsis-h\")), this.content = skynode_1.el(\"main\")));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Layout;\r\n\n\n//# sourceURL=webpack:///./src/view/Layout.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst skyrouter_1 = __webpack_require__(/*! skyrouter */ \"./node_modules/skyrouter/lib/index.js\");\r\nconst UserInfo_1 = __importDefault(__webpack_require__(/*! ../component/UserInfo */ \"./src/component/UserInfo.ts\"));\r\nclass Layout {\r\n    constructor() {\r\n        Layout.current = this;\r\n        skynode_1.BodyNode.append(this.container = skynode_1.el(\"#layout\", skynode_1.el(\"header\", skynode_1.el(\"h1\", skynode_1.el(\"a\", skynode_1.el(\"img.logo\", { src: \"/images/logo.png\" }), { click: () => skyrouter_1.SkyRouter.go(\"/\") })), skynode_1.el(\"nav\", skynode_1.el(\"a\", \"Home\", { click: () => skyrouter_1.SkyRouter.go(\"/\") }), skynode_1.el(\"a\", \"Maid\", { click: () => skyrouter_1.SkyRouter.go(\"/maid\") }), skynode_1.el(\"a\", \"Earn\", { click: () => skyrouter_1.SkyRouter.go(\"/earn\") }), skynode_1.el(\"a\", \"Nurse\", { click: () => skyrouter_1.SkyRouter.go(\"/nurse\") }), skynode_1.el(\"a\", \"Test LP Token\", { click: () => skyrouter_1.SkyRouter.go(\"/test-lp-token\") })), new UserInfo_1.default(), skynode_1.el(\"a.more-button.fas.fa-ellipsis-h\")), this.content = skynode_1.el(\"main\")));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Layout;\r\n\n\n//# sourceURL=webpack:///./src/view/Layout.ts?");
+
+/***/ }),
+
+/***/ "./src/view/Maid.ts":
+/*!**************************!*\
+  !*** ./src/view/Maid.ts ***!
+  \**************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst Layout_1 = __importDefault(__webpack_require__(/*! ./Layout */ \"./src/view/Layout.ts\"));\r\nclass Maid {\r\n    constructor() {\r\n        Layout_1.default.current.content.append(this.container = skynode_1.el(\"#maid\", \"Maid!\"));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Maid;\r\n\n\n//# sourceURL=webpack:///./src/view/Maid.ts?");
+
+/***/ }),
+
+/***/ "./src/view/Nurse.ts":
+/*!***************************!*\
+  !*** ./src/view/Nurse.ts ***!
+  \***************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nconst skynode_1 = __webpack_require__(/*! @hanul/skynode */ \"./node_modules/@hanul/skynode/lib/index.js\");\r\nconst Layout_1 = __importDefault(__webpack_require__(/*! ./Layout */ \"./src/view/Layout.ts\"));\r\nclass Nurse {\r\n    constructor() {\r\n        Layout_1.default.current.content.append(this.container = skynode_1.el(\"#nurse\", \"Nurse!\"));\r\n    }\r\n    changeParams(params, uri) { }\r\n    close() {\r\n        this.container.delete();\r\n    }\r\n}\r\nexports.default = Nurse;\r\n\n\n//# sourceURL=webpack:///./src/view/Nurse.ts?");
 
 /***/ }),
 
