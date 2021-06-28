@@ -10,4 +10,8 @@ export default abstract class ERC721Contract<CT extends ethers.Contract> extends
             "ApprovalForAll",
         ]));
     }
+
+    public async getTotalSupply() {
+        return await this.contract.totalSupply();
+    }
 }

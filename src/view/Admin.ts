@@ -14,9 +14,9 @@ export default class Admin implements View {
             el(".control",
                 el("a.mint-maid-button", "Mint Maid", {
                     click: async () => {
-                        const amount = prompt("Please enter the maid's power", "50");
-                        if (amount) {
-                            await MaidContract.mint(amount);
+                        const power = prompt("Please enter the maid's power", "50");
+                        if (power) {
+                            await MaidContract.mint(power);
                         }
                     },
                 }),
