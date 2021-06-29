@@ -1,5 +1,6 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { BigNumber, ethers } from "ethers";
+import { BigNumber, BigNumberish, constants, ethers } from "ethers";
+import { splitSignature } from "ethers/lib/utils";
 import EventContainer from "eventcontainer";
 import Config from "../Config";
 
@@ -61,6 +62,75 @@ class Wallet extends EventContainer {
             await this.walletConnectProvider?.enable();
         }
         this.checkConnected();
+    }
+
+    public async signMessage(
+
+        name: string,
+        version: string,
+        verifyingContract: string,
+
+        spender: string,
+        amount: BigNumberish,
+        nonce: BigNumber,
+        timelimit: number,
+    ) {
+        const owner = await this.loadAddress();
+        const deadline = constants.MaxUint256;//Math.ceil(Date.now() / 1000) + timelimit;
+
+        const EIP712Domain = [
+            { name: "name", type: "string" },
+            { name: "version", type: "string" },
+            { name: "chainId", type: "uint256" },
+            { name: "verifyingContract", type: "address" },
+        ];
+        const domain = {
+            name,
+            version,
+            chainId: Config.chainId,
+            verifyingContract,
+        };
+        const Permit = [
+            { name: "owner", type: "address" },
+            { name: "spender", type: "address" },
+            { name: "value", type: "uint256" },
+            { name: "nonce", type: "uint256" },
+            { name: "deadline", type: "uint256" },
+        ];
+        const message = {
+            owner,
+            spender,
+            value: BigNumber.from(amount).toString(),
+            nonce: BigNumber.from(nonce).toHexString(),
+            deadline: BigNumber.from(deadline).toString(),
+        };
+        const data = JSON.stringify({
+            types: {
+                EIP712Domain,
+                Permit,
+            },
+            domain,
+            primaryType: "Permit",
+            message,
+        });
+        const payload = { method: "eth_signTypedData_v4", params: [owner, data], from: owner };
+
+        let signedMessage;
+        if (this.existsInjectedProvider === true) {
+            signedMessage = await this.ethereum.request(payload);
+        } else {
+            signedMessage = await this.walletConnectProvider?.request(payload);
+        }
+
+        console.log(signedMessage);
+
+        const signature = splitSignature(signedMessage);
+        return {
+            deadline,
+            v: signature.v,
+            r: signature.r,
+            s: signature.s,
+        };
     }
 }
 

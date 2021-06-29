@@ -1,4 +1,4 @@
-import { ethers } from "ethers";
+import { BigNumber, BigNumberish, ethers } from "ethers";
 import EventContainer from "eventcontainer";
 declare class Wallet extends EventContainer {
     private ethereum;
@@ -12,6 +12,12 @@ declare class Wallet extends EventContainer {
     loadChainId(): Promise<number>;
     connected(): Promise<boolean>;
     connect(): Promise<void>;
+    signMessage(name: string, version: string, verifyingContract: string, spender: string, amount: BigNumberish, nonce: BigNumber, timelimit: number): Promise<{
+        deadline: BigNumber;
+        v: number;
+        r: string;
+        s: string;
+    }>;
 }
 declare const _default: Wallet;
 export default _default;

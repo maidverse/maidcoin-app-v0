@@ -1,4 +1,5 @@
 declare const _default: {
+    chainId: number;
     infuraId: string;
     rpc: string;
     contracts: {

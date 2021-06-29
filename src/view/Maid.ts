@@ -24,7 +24,7 @@ export default class Maid implements View {
         this.maidList.appendText(`Total Maids: ${maidCount}`);
 
         SkyUtil.repeat(maidCount.toNumber(), async (maidId) => {
-            const maidSummary = new MaidSummary().appendTo(this.maidList);
+            const maidSummary = new MaidSummary(maidId).appendTo(this.maidList);
             maidSummary.maid = await MaidContract.getMaid(maidId);
         });
     }

@@ -9,6 +9,7 @@ declare class MaidContract extends ERC721Contract<Maid> {
     constructor();
     getMaid(maidId: number): Promise<MaidInfo>;
     mint(power: BigNumberish): Promise<void>;
+    support(id: BigNumberish, lpTokenAmount: BigNumberish): Promise<void>;
 }
 declare const _default: MaidContract;
 export default _default;
