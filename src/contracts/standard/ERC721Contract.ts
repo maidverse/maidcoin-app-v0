@@ -1,4 +1,4 @@
-import { ContractInterface, ethers } from "ethers";
+import { BigNumber, ContractInterface, ethers } from "ethers";
 import Contract from "../Contract";
 
 export default abstract class ERC721Contract<CT extends ethers.Contract> extends Contract<CT> {
@@ -11,7 +11,7 @@ export default abstract class ERC721Contract<CT extends ethers.Contract> extends
         ]));
     }
 
-    public async getTotalSupply() {
+    public async getTotalSupply(): Promise<BigNumber> {
         return await this.contract.totalSupply();
     }
 }
