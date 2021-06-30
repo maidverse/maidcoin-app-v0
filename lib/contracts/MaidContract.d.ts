@@ -1,9 +1,9 @@
-import { BigNumberish } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import ERC721Contract from "./standard/ERC721Contract";
 import { Maid } from "./typechain";
 export interface MaidInfo {
     originPower: number;
-    supportedLPTokenAmount: number;
+    supportedLPTokenAmount: BigNumber;
 }
 declare class MaidContract extends ERC721Contract<Maid> {
     constructor();

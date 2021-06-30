@@ -13,7 +13,7 @@ export default class MaidSummary extends DomNode {
         this.empty().append(
             el("", `Maid #${this.maidId}`),
             el("", `Origin Power: ${maid.originPower}`),
-            el("", `Supported LP Token Amount: ${maid.supportedLPTokenAmount}`),
+            el("", `Supported LP Token Amount: ${utils.formatEther(maid.supportedLPTokenAmount)}`),
             el("a.support-button", "Support", {
                 click: async () => {
                     const amount = prompt("How much amount to support?", "10");

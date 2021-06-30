@@ -1,4 +1,4 @@
-import { BigNumberish } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import Config from "../Config";
 import Wallet from "../ethereum/Wallet";
 import MaidArtifact from "./artifacts/contracts/Maid.sol/Maid.json";
@@ -8,7 +8,7 @@ import { Maid } from "./typechain";
 
 export interface MaidInfo {
     originPower: number;
-    supportedLPTokenAmount: number;
+    supportedLPTokenAmount: BigNumber;
 }
 
 class MaidContract extends ERC721Contract<Maid> {
@@ -22,7 +22,7 @@ class MaidContract extends ERC721Contract<Maid> {
         const [originPower, supportedLPTokenAmount] = await this.contract.maids(maidId);
         return {
             originPower: originPower.toNumber(),
-            supportedLPTokenAmount: supportedLPTokenAmount.toNumber(),
+            supportedLPTokenAmount: supportedLPTokenAmount,
         };
     }
 
