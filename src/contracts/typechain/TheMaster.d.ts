@@ -34,9 +34,10 @@ interface TheMasterInterface extends ethers.utils.Interface {
     "initialRewardPerBlock()": FunctionFragment;
     "maidCoin()": FunctionFragment;
     "mint(address,uint256)": FunctionFragment;
+    "mintableByAddr(address)": FunctionFragment;
     "owner()": FunctionFragment;
     "pendingReward(uint256,uint256)": FunctionFragment;
-    "pidByAddr(address)": FunctionFragment;
+    "poolCount()": FunctionFragment;
     "poolInfo(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rewardCalculator()": FunctionFragment;
@@ -111,12 +112,16 @@ interface TheMasterInterface extends ethers.utils.Interface {
     functionFragment: "mint",
     values: [string, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "mintableByAddr",
+    values: [string]
+  ): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "pendingReward",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "pidByAddr", values: [string]): string;
+  encodeFunctionData(functionFragment: "poolCount", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "poolInfo",
     values: [BigNumberish]
@@ -195,12 +200,16 @@ interface TheMasterInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "maidCoin", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "mintableByAddr",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "pendingReward",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "pidByAddr", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "poolCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poolInfo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -413,6 +422,13 @@ export class TheMaster extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    mintableByAddr(arg0: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    "mintableByAddr(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     owner(overrides?: CallOverrides): Promise<[string]>;
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
@@ -429,12 +445,9 @@ export class TheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    pidByAddr(arg0: string, overrides?: CallOverrides): Promise<[BigNumber]>;
+    poolCount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "pidByAddr(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    "poolCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     poolInfo(
       arg0: BigNumberish,
@@ -442,7 +455,6 @@ export class TheMaster extends Contract {
     ): Promise<
       [
         string,
-        boolean,
         boolean,
         string,
         number,
@@ -453,7 +465,6 @@ export class TheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -470,7 +481,6 @@ export class TheMaster extends Contract {
       [
         string,
         boolean,
-        boolean,
         string,
         number,
         BigNumber,
@@ -480,7 +490,6 @@ export class TheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -721,6 +730,13 @@ export class TheMaster extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  mintableByAddr(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
+  "mintableByAddr(address)"(
+    arg0: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   owner(overrides?: CallOverrides): Promise<string>;
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -737,12 +753,9 @@ export class TheMaster extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  pidByAddr(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+  poolCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "pidByAddr(address)"(
-    arg0: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  "poolCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   poolInfo(
     arg0: BigNumberish,
@@ -750,7 +763,6 @@ export class TheMaster extends Contract {
   ): Promise<
     [
       string,
-      boolean,
       boolean,
       string,
       number,
@@ -761,7 +773,6 @@ export class TheMaster extends Contract {
     ] & {
       addr: string;
       delegate: boolean;
-      mintable: boolean;
       supportable: string;
       supportingRatio: number;
       allocPoint: BigNumber;
@@ -778,7 +789,6 @@ export class TheMaster extends Contract {
     [
       string,
       boolean,
-      boolean,
       string,
       number,
       BigNumber,
@@ -788,7 +798,6 @@ export class TheMaster extends Contract {
     ] & {
       addr: string;
       delegate: boolean;
-      mintable: boolean;
       supportable: string;
       supportingRatio: number;
       allocPoint: BigNumber;
@@ -1029,6 +1038,13 @@ export class TheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    mintableByAddr(arg0: string, overrides?: CallOverrides): Promise<boolean>;
+
+    "mintableByAddr(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
@@ -1045,12 +1061,9 @@ export class TheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    pidByAddr(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    poolCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "pidByAddr(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "poolCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     poolInfo(
       arg0: BigNumberish,
@@ -1058,7 +1071,6 @@ export class TheMaster extends Contract {
     ): Promise<
       [
         string,
-        boolean,
         boolean,
         string,
         number,
@@ -1069,7 +1081,6 @@ export class TheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -1086,7 +1097,6 @@ export class TheMaster extends Contract {
       [
         string,
         boolean,
-        boolean,
         string,
         number,
         BigNumber,
@@ -1096,7 +1106,6 @@ export class TheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -1400,6 +1409,13 @@ export class TheMaster extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    mintableByAddr(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "mintableByAddr(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1416,12 +1432,9 @@ export class TheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    pidByAddr(arg0: string, overrides?: CallOverrides): Promise<BigNumber>;
+    poolCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "pidByAddr(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "poolCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     poolInfo(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1666,6 +1679,16 @@ export class TheMaster extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    mintableByAddr(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "mintableByAddr(address)"(
+      arg0: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1682,15 +1705,9 @@ export class TheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    pidByAddr(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    poolCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "pidByAddr(address)"(
-      arg0: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    "poolCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     poolInfo(
       arg0: BigNumberish,

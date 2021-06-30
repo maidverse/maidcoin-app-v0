@@ -33,33 +33,4 @@ export default abstract class Contract<CT extends ethers.Contract> extends Event
             return this.walletContract;
         }
     }
-
-    public static convertMessageToHash(message: string) {
-        return ethers.utils.keccak256(ethers.utils.toUtf8Bytes(message));
-    }
-
-    protected getDomainSeparator(name: string) {
-        return ethers.utils.keccak256(ethers.utils.defaultAbiCoder.encode(
-            ["bytes32", "bytes32", "bytes32", "uint256", "address"],
-            [
-                ethers.utils.keccak256(ethers.utils.toUtf8Bytes("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)")),
-                ethers.utils.keccak256(ethers.utils.toUtf8Bytes(name)),
-                ethers.utils.keccak256(ethers.utils.toUtf8Bytes("1")),
-                Config.chainId,
-                this.address,
-            ]
-        ));
-    }
-
-    protected getApprovalDigest(name: string, types: string[], values: any[]) {
-        return ethers.utils.keccak256(ethers.utils.solidityPack(
-            ["bytes1", "bytes1", "bytes32", "bytes32"],
-            [
-                "0x19",
-                "0x01",
-                this.getDomainSeparator(name),
-                ethers.utils.keccak256(ethers.utils.defaultAbiCoder.encode(types, values)),
-            ],
-        ));
-    }
 }

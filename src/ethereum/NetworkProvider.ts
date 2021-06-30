@@ -12,6 +12,10 @@ class NetworkProvider extends EventContainer {
         this.provider = new ethers.providers.JsonRpcProvider(Config.rpc);
         this.signer = this.provider.getSigner(ethers.constants.AddressZero);
     }
+
+    public async getBlockNumber() {
+        return await this.provider.getBlockNumber();
+    }
 }
 
 export default new NetworkProvider();

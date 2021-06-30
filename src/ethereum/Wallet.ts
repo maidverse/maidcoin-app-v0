@@ -1,5 +1,5 @@
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { BigNumber, BigNumberish, constants, ethers } from "ethers";
+import { BigNumber, BigNumberish, ethers } from "ethers";
 import { splitSignature } from "ethers/lib/utils";
 import EventContainer from "eventcontainer";
 import Config from "../Config";
@@ -64,46 +64,34 @@ class Wallet extends EventContainer {
         this.checkConnected();
     }
 
-    public async signMessage(
+    public async signTypedData(
+        owner: string | undefined,
+        deadline: number,
 
         name: string,
         version: string,
         verifyingContract: string,
 
-        spender: string,
-        amount: BigNumberish,
-        nonce: BigNumber,
-        timelimit: number,
+        Permit: {
+            name: string;
+            type: string;
+        }[],
+        message: any,
     ) {
-        const owner = await this.loadAddress();
-        const deadline = constants.MaxUint256;//Math.ceil(Date.now() / 1000) + timelimit;
-
         const EIP712Domain = [
             { name: "name", type: "string" },
             { name: "version", type: "string" },
             { name: "chainId", type: "uint256" },
             { name: "verifyingContract", type: "address" },
         ];
+
         const domain = {
             name,
             version,
             chainId: Config.chainId,
             verifyingContract,
         };
-        const Permit = [
-            { name: "owner", type: "address" },
-            { name: "spender", type: "address" },
-            { name: "value", type: "uint256" },
-            { name: "nonce", type: "uint256" },
-            { name: "deadline", type: "uint256" },
-        ];
-        const message = {
-            owner,
-            spender,
-            value: BigNumber.from(amount).toString(),
-            nonce: BigNumber.from(nonce).toHexString(),
-            deadline: BigNumber.from(deadline).toString(),
-        };
+
         const data = JSON.stringify({
             types: {
                 EIP712Domain,
@@ -113,7 +101,12 @@ class Wallet extends EventContainer {
             primaryType: "Permit",
             message,
         });
-        const payload = { method: "eth_signTypedData_v4", params: [owner, data], from: owner };
+
+        const payload = {
+            method: "eth_signTypedData_v4",
+            params: [owner, data],
+            from: owner,
+        };
 
         let signedMessage;
         if (this.existsInjectedProvider === true) {
@@ -122,15 +115,133 @@ class Wallet extends EventContainer {
             signedMessage = await this.walletConnectProvider?.request(payload);
         }
 
-        console.log(signedMessage);
-
         const signature = splitSignature(signedMessage);
         return {
-            deadline,
             v: signature.v,
             r: signature.r,
             s: signature.s,
         };
+    }
+
+    public async signERC20Permit(
+
+        name: string,
+        version: string,
+        verifyingContract: string,
+
+        spender: string,
+        amount: BigNumberish,
+        nonce: BigNumber,
+        deadline: number,
+    ) {
+        const owner = await this.loadAddress();
+
+        const Permit = [
+            { name: "owner", type: "address" },
+            { name: "spender", type: "address" },
+            { name: "value", type: "uint256" },
+            { name: "nonce", type: "uint256" },
+            { name: "deadline", type: "uint256" },
+        ];
+
+        const message = {
+            owner,
+            spender,
+            value: BigNumber.from(amount).toString(),
+            nonce: BigNumber.from(nonce).toHexString(),
+            deadline: BigNumber.from(deadline).toString(),
+        };
+
+        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
+    }
+
+    public async signERC721Permit(
+
+        name: string,
+        version: string,
+        verifyingContract: string,
+
+        spender: string,
+        id: BigNumber,
+        nonce: BigNumber,
+        deadline: number,
+    ) {
+        const owner = await this.loadAddress();
+
+        const Permit = [
+            { name: "spender", type: "address" },
+            { name: "id", type: "uint256" },
+            { name: "nonce", type: "uint256" },
+            { name: "deadline", type: "uint256" },
+        ];
+
+        const message = {
+            spender,
+            id: BigNumber.from(id).toHexString(),
+            nonce: BigNumber.from(nonce).toHexString(),
+            deadline: BigNumber.from(deadline).toString(),
+        };
+
+        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
+    }
+
+    public async signERC721PermitAll(
+
+        name: string,
+        version: string,
+        verifyingContract: string,
+
+        spender: string,
+        nonce: BigNumber,
+        timelimit: number,
+    ) {
+        const owner = await this.loadAddress();
+        const deadline = Math.ceil(Date.now() / 1000) + timelimit;
+
+        const Permit = [
+            { name: "owner", type: "address" },
+            { name: "spender", type: "address" },
+            { name: "nonce", type: "uint256" },
+            { name: "deadline", type: "uint256" },
+        ];
+
+        const message = {
+            owner,
+            spender,
+            nonce: BigNumber.from(nonce).toHexString(),
+            deadline: BigNumber.from(deadline).toString(),
+        };
+
+        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
+    }
+
+    public async signERC1155Permit(
+
+        name: string,
+        version: string,
+        verifyingContract: string,
+
+        spender: string,
+        nonce: BigNumber,
+        deadline: number,
+    ) {
+        const owner = await this.loadAddress();
+
+        const Permit = [
+            { name: "owner", type: "address" },
+            { name: "spender", type: "address" },
+            { name: "nonce", type: "uint256" },
+            { name: "deadline", type: "uint256" },
+        ];
+
+        const message = {
+            owner,
+            spender,
+            nonce: BigNumber.from(nonce).toHexString(),
+            deadline: BigNumber.from(deadline).toString(),
+        };
+
+        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
     }
 }
 

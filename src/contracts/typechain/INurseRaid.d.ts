@@ -31,6 +31,7 @@ interface INurseRaidInterface extends ethers.utils.Interface {
     "maidCoin()": FunctionFragment;
     "maidPowerToRaidReducedBlock()": FunctionFragment;
     "nursePart()": FunctionFragment;
+    "raidCount()": FunctionFragment;
     "rng()": FunctionFragment;
   };
 
@@ -74,6 +75,7 @@ interface INurseRaidInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "nursePart", values?: undefined): string;
+  encodeFunctionData(functionFragment: "raidCount", values?: undefined): string;
   encodeFunctionData(functionFragment: "rng", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "checkDone", data: BytesLike): Result;
@@ -91,6 +93,7 @@ interface INurseRaidInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "nursePart", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "raidCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "rng", data: BytesLike): Result;
 
   events: {
@@ -212,6 +215,10 @@ export class INurseRaid extends Contract {
 
     "nursePart()"(overrides?: CallOverrides): Promise<[string]>;
 
+    raidCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     rng(overrides?: CallOverrides): Promise<[string]>;
 
     "rng()"(overrides?: CallOverrides): Promise<[string]>;
@@ -305,6 +312,10 @@ export class INurseRaid extends Contract {
 
   "nursePart()"(overrides?: CallOverrides): Promise<string>;
 
+  raidCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "raidCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   rng(overrides?: CallOverrides): Promise<string>;
 
   "rng()"(overrides?: CallOverrides): Promise<string>;
@@ -394,6 +405,10 @@ export class INurseRaid extends Contract {
     nursePart(overrides?: CallOverrides): Promise<string>;
 
     "nursePart()"(overrides?: CallOverrides): Promise<string>;
+
+    raidCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     rng(overrides?: CallOverrides): Promise<string>;
 
@@ -510,6 +525,10 @@ export class INurseRaid extends Contract {
 
     "nursePart()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    raidCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     rng(overrides?: CallOverrides): Promise<BigNumber>;
 
     "rng()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -611,6 +630,10 @@ export class INurseRaid extends Contract {
     nursePart(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "nursePart()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    raidCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     rng(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

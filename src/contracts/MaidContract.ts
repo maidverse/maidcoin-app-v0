@@ -22,7 +22,7 @@ class MaidContract extends ERC721Contract<Maid> {
         const [originPower, supportedLPTokenAmount] = await this.contract.maids(maidId);
         return {
             originPower: originPower.toNumber(),
-            supportedLPTokenAmount: supportedLPTokenAmount,
+            supportedLPTokenAmount,
         };
     }
 
@@ -31,23 +31,20 @@ class MaidContract extends ERC721Contract<Maid> {
         await contract?.mint(power);
     }
 
+    public async isApprovedForAll(owner: string, operator: string): Promise<boolean> {
+        return await this.contract.isApprovedForAll(owner, operator);
+    }
+
     public async support(id: BigNumberish, lpTokenAmount: BigNumberish) {
+
         const contract = await this.loadWalletContract();
         const owner = await Wallet.loadAddress();
         if (contract !== undefined && owner !== undefined) {
+
             if (await LPTokenContract.allowance(owner, this.address) < lpTokenAmount) {
 
-                console.log(
-                    await LPTokenContract.getName(),
-                    "1",
-                    LPTokenContract.address,
-
-                    this.address,
-                    lpTokenAmount,
-                    await LPTokenContract.getNonce(owner),
-                )
-
-                const result = await Wallet.signMessage(
+                const deadline = Math.ceil(Date.now() / 1000) + 1000000;
+                const signed = await Wallet.signERC20Permit(
 
                     await LPTokenContract.getName(),
                     "1",
@@ -56,14 +53,10 @@ class MaidContract extends ERC721Contract<Maid> {
                     this.address,
                     lpTokenAmount,
                     await LPTokenContract.getNonce(owner),
-                    1000000,
+                    deadline,
                 );
 
-                console.log(owner, this.address, lpTokenAmount, result);
-
-                //const digest = await LPTokenContract.loadApprovalDigest(owner, this.address, lpTokenAmount);
-                //console.log(await Wallet.signMessage(digest));
-                await contract.supportWithPermit(id, lpTokenAmount, result.deadline, result.v, result.r, result.s);
+                await contract.supportWithPermit(id, lpTokenAmount, deadline, signed.v, signed.r, signed.s);
             } else {
                 await contract.support(id, lpTokenAmount);
             }

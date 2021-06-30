@@ -531,6 +531,25 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "addr",
+        type: "address",
+      },
+    ],
+    name: "mintableByAddr",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "pid",
         type: "uint256",
@@ -553,18 +572,12 @@ const _abi = [
     type: "function",
   },
   {
-    inputs: [
-      {
-        internalType: "address",
-        name: "addr",
-        type: "address",
-      },
-    ],
-    name: "pidByAddr",
+    inputs: [],
+    name: "poolCount",
     outputs: [
       {
         internalType: "uint256",
-        name: "pid",
+        name: "",
         type: "uint256",
       },
     ],
@@ -589,11 +602,6 @@ const _abi = [
       {
         internalType: "bool",
         name: "delegate",
-        type: "bool",
-      },
-      {
-        internalType: "bool",
-        name: "mintable",
         type: "bool",
       },
       {

@@ -35,6 +35,7 @@ interface NurseRaidInterface extends ethers.utils.Interface {
     "maidPowerToRaidReducedBlock()": FunctionFragment;
     "nursePart()": FunctionFragment;
     "owner()": FunctionFragment;
+    "raidCount()": FunctionFragment;
     "raids(uint256)": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "rng()": FunctionFragment;
@@ -91,6 +92,7 @@ interface NurseRaidInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "nursePart", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "raidCount", values?: undefined): string;
   encodeFunctionData(functionFragment: "raids", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -127,6 +129,7 @@ interface NurseRaidInterface extends ethers.utils.Interface {
   ): Result;
   decodeFunctionResult(functionFragment: "nursePart", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "raidCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "raids", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -299,6 +302,10 @@ export class NurseRaid extends Contract {
 
     "owner()"(overrides?: CallOverrides): Promise<[string]>;
 
+    raidCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     raids(
       arg0: BigNumberish,
       overrides?: CallOverrides
@@ -469,6 +476,10 @@ export class NurseRaid extends Contract {
 
   "owner()"(overrides?: CallOverrides): Promise<string>;
 
+  raidCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "raidCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
   raids(
     arg0: BigNumberish,
     overrides?: CallOverrides
@@ -635,6 +646,10 @@ export class NurseRaid extends Contract {
     owner(overrides?: CallOverrides): Promise<string>;
 
     "owner()"(overrides?: CallOverrides): Promise<string>;
+
+    raidCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     raids(
       arg0: BigNumberish,
@@ -829,6 +844,10 @@ export class NurseRaid extends Contract {
 
     "owner()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    raidCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<BigNumber>;
+
     raids(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     "raids(uint256)"(
@@ -987,6 +1006,10 @@ export class NurseRaid extends Contract {
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "owner()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    raidCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "raidCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     raids(
       arg0: BigNumberish,

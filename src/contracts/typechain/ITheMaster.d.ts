@@ -34,8 +34,9 @@ interface ITheMasterInterface extends ethers.utils.Interface {
     "initialRewardPerBlock()": FunctionFragment;
     "maidCoin()": FunctionFragment;
     "mint(address,uint256)": FunctionFragment;
+    "mintableByAddr(address)": FunctionFragment;
     "pendingReward(uint256,uint256)": FunctionFragment;
-    "pidByAddr(address)": FunctionFragment;
+    "poolCount()": FunctionFragment;
     "poolInfo(uint256)": FunctionFragment;
     "rewardCalculator()": FunctionFragment;
     "rewardPerBlock()": FunctionFragment;
@@ -109,10 +110,14 @@ interface ITheMasterInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "mintableByAddr",
+    values: [string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "pendingReward",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "pidByAddr", values: [string]): string;
+  encodeFunctionData(functionFragment: "poolCount", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "poolInfo",
     values: [BigNumberish]
@@ -184,10 +189,14 @@ interface ITheMasterInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "maidCoin", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(
+    functionFragment: "mintableByAddr",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "pendingReward",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "pidByAddr", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "poolCount", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "poolInfo", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "rewardCalculator",
@@ -390,6 +399,13 @@ export class ITheMaster extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    mintableByAddr(addr: string, overrides?: CallOverrides): Promise<[boolean]>;
+
+    "mintableByAddr(address)"(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<[boolean]>;
+
     pendingReward(
       pid: BigNumberish,
       userId: BigNumberish,
@@ -402,15 +418,9 @@ export class ITheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
-    pidByAddr(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { pid: BigNumber }>;
+    poolCount(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    "pidByAddr(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { pid: BigNumber }>;
+    "poolCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     poolInfo(
       pid: BigNumberish,
@@ -418,7 +428,6 @@ export class ITheMaster extends Contract {
     ): Promise<
       [
         string,
-        boolean,
         boolean,
         string,
         number,
@@ -429,7 +438,6 @@ export class ITheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -446,7 +454,6 @@ export class ITheMaster extends Contract {
       [
         string,
         boolean,
-        boolean,
         string,
         number,
         BigNumber,
@@ -456,7 +463,6 @@ export class ITheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -683,6 +689,13 @@ export class ITheMaster extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  mintableByAddr(addr: string, overrides?: CallOverrides): Promise<boolean>;
+
+  "mintableByAddr(address)"(
+    addr: string,
+    overrides?: CallOverrides
+  ): Promise<boolean>;
+
   pendingReward(
     pid: BigNumberish,
     userId: BigNumberish,
@@ -695,12 +708,9 @@ export class ITheMaster extends Contract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  pidByAddr(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+  poolCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-  "pidByAddr(address)"(
-    addr: string,
-    overrides?: CallOverrides
-  ): Promise<BigNumber>;
+  "poolCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   poolInfo(
     pid: BigNumberish,
@@ -708,7 +718,6 @@ export class ITheMaster extends Contract {
   ): Promise<
     [
       string,
-      boolean,
       boolean,
       string,
       number,
@@ -719,7 +728,6 @@ export class ITheMaster extends Contract {
     ] & {
       addr: string;
       delegate: boolean;
-      mintable: boolean;
       supportable: string;
       supportingRatio: number;
       allocPoint: BigNumber;
@@ -736,7 +744,6 @@ export class ITheMaster extends Contract {
     [
       string,
       boolean,
-      boolean,
       string,
       number,
       BigNumber,
@@ -746,7 +753,6 @@ export class ITheMaster extends Contract {
     ] & {
       addr: string;
       delegate: boolean;
-      mintable: boolean;
       supportable: string;
       supportingRatio: number;
       allocPoint: BigNumber;
@@ -973,6 +979,13 @@ export class ITheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    mintableByAddr(addr: string, overrides?: CallOverrides): Promise<boolean>;
+
+    "mintableByAddr(address)"(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
     pendingReward(
       pid: BigNumberish,
       userId: BigNumberish,
@@ -985,12 +998,9 @@ export class ITheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    pidByAddr(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+    poolCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "pidByAddr(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "poolCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     poolInfo(
       pid: BigNumberish,
@@ -998,7 +1008,6 @@ export class ITheMaster extends Contract {
     ): Promise<
       [
         string,
-        boolean,
         boolean,
         string,
         number,
@@ -1009,7 +1018,6 @@ export class ITheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -1026,7 +1034,6 @@ export class ITheMaster extends Contract {
       [
         string,
         boolean,
-        boolean,
         string,
         number,
         BigNumber,
@@ -1036,7 +1043,6 @@ export class ITheMaster extends Contract {
       ] & {
         addr: string;
         delegate: boolean;
-        mintable: boolean;
         supportable: string;
         supportingRatio: number;
         allocPoint: BigNumber;
@@ -1321,6 +1327,13 @@ export class ITheMaster extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    mintableByAddr(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    "mintableByAddr(address)"(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     pendingReward(
       pid: BigNumberish,
       userId: BigNumberish,
@@ -1333,12 +1346,9 @@ export class ITheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    pidByAddr(addr: string, overrides?: CallOverrides): Promise<BigNumber>;
+    poolCount(overrides?: CallOverrides): Promise<BigNumber>;
 
-    "pidByAddr(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
+    "poolCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     poolInfo(pid: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1569,6 +1579,16 @@ export class ITheMaster extends Contract {
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
+    mintableByAddr(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "mintableByAddr(address)"(
+      addr: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     pendingReward(
       pid: BigNumberish,
       userId: BigNumberish,
@@ -1581,15 +1601,9 @@ export class ITheMaster extends Contract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    pidByAddr(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    poolCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    "pidByAddr(address)"(
-      addr: string,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
+    "poolCount()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     poolInfo(
       pid: BigNumberish,
