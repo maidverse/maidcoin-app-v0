@@ -17,7 +17,7 @@ declare class NurseRaidContract extends Contract<NurseRaid> {
     getRaidCount(): Promise<BigNumber>;
     getRaid(raidId: number): Promise<RaidInfo>;
     getChallenger(raidId: number, owner: string): Promise<ChallengerInfo>;
-    checkDone(raidId: number): Promise<boolean>;
+    checkDone(raidId: number): Promise<boolean | undefined>;
     create(entranceFee: BigNumberish, nursePart: BigNumberish, maxRewardCount: BigNumberish, duration: BigNumberish, endBlock: BigNumberish): Promise<void>;
     enter(raidId: number, maid?: number): Promise<void>;
     exit(raidId: number): Promise<void>;

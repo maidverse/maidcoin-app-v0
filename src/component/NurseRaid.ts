@@ -38,8 +38,8 @@ export default class NurseRaid extends DomNode {
     private async loadChallenger() {
         const owner = await Wallet.loadAddress();
         if (owner !== undefined) {
-            console.log(await NurseRaidContract.getChallenger(this.raidId, owner));
-            console.log(await NurseRaidContract.checkDone(this.raidId));
+            console.log(this.raidId, await NurseRaidContract.getChallenger(this.raidId, owner));
+            console.log(this.raidId, await NurseRaidContract.checkDone(this.raidId));
         }
     }
 }

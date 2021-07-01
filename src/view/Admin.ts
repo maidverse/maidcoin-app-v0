@@ -32,7 +32,7 @@ export default class Admin implements View {
                     },
                 }),
                 el(".create-nurse-form",
-                    this.currentBlock = el("", "Current Block"),
+                    this.currentBlock = el("", "Current Block "),
                     entranceFeeInput = el("input", { placeholder: "Entrance Fee" }),
                     nursePartInput = el("input", { placeholder: "Nurse Part" }),
                     maxRewardCountInput = el("input", { placeholder: "Max Reward Count" }),

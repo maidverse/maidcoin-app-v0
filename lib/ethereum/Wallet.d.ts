@@ -30,7 +30,7 @@ declare class Wallet extends EventContainer {
         r: string;
         s: string;
     }>;
-    signERC721PermitAll(name: string, version: string, verifyingContract: string, spender: string, nonce: BigNumber, timelimit: number): Promise<{
+    signERC721PermitAll(name: string, version: string, verifyingContract: string, spender: string, nonce: BigNumber, deadline: number): Promise<{
         v: number;
         r: string;
         s: string;

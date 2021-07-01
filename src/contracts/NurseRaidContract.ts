@@ -50,8 +50,8 @@ class NurseRaidContract extends Contract<NurseRaid> {
         };
     }
 
-    public async checkDone(raidId: number): Promise<boolean> {
-        return await this.contract.checkDone(raidId);
+    public async checkDone(raidId: number): Promise<boolean | undefined> {
+        return await this.walletContract?.checkDone(raidId);
     }
 
     public async create(
@@ -73,11 +73,8 @@ class NurseRaidContract extends Contract<NurseRaid> {
 
             const raid = await this.getRaid(raidId);
 
-            console.log(await MaidCoinContract.allowance(owner, this.address) < raid.entranceFee);
-            console.log(await MaidContract.isApprovedForAll(owner, this.address));
-
             if (
-                await MaidCoinContract.allowance(owner, this.address) < raid.entranceFee ||
+                (await MaidCoinContract.allowance(owner, this.address)).lt(raid.entranceFee) ||
                 await MaidContract.isApprovedForAll(owner, this.address) !== true
             ) {
                 const deadline = Math.ceil(Date.now() / 1000) + 1000000;
@@ -109,6 +106,12 @@ class NurseRaidContract extends Contract<NurseRaid> {
                     raidId, maid === undefined ? constants.MaxUint256 : maid, deadline,
                     maidCoinSigned.v, maidCoinSigned.r, maidCoinSigned.s,
                     maidSigned.v, maidSigned.r, maidSigned.s,
+                );
+            }
+
+            else {
+                await contract.enter(
+                    raidId, maid === undefined ? constants.MaxUint256 : maid,
                 );
             }
         }

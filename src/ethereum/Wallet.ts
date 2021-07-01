@@ -193,10 +193,9 @@ class Wallet extends EventContainer {
 
         spender: string,
         nonce: BigNumber,
-        timelimit: number,
+        deadline: number,
     ) {
         const owner = await this.loadAddress();
-        const deadline = Math.ceil(Date.now() / 1000) + timelimit;
 
         const Permit = [
             { name: "owner", type: "address" },

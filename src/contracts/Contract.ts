@@ -6,7 +6,7 @@ import Wallet from "../ethereum/Wallet";
 
 export default abstract class Contract<CT extends ethers.Contract> extends EventContainer {
 
-    private walletContract: CT | undefined;
+    protected walletContract: CT | undefined;
     protected contract: CT;
 
     constructor(public address: string, private abi: ContractInterface, eventNames: string[]) {
