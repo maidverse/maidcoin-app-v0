@@ -12,6 +12,10 @@ interface NurseType {
     power: number;
 }
 
+interface NurseInfo {
+    nurseType: number;
+}
+
 class CloneNurseContract extends ERC721Contract<CloneNurse> {
 
     constructor() {
@@ -39,6 +43,17 @@ class CloneNurseContract extends ERC721Contract<CloneNurse> {
             destroyReturn,
             power: power.toNumber(),
         };
+    }
+
+    public async getNurse(nurseId: number): Promise<NurseInfo> {
+        const nurseType = await this.contract.nurses(nurseId);
+        return {
+            nurseType: nurseType.toNumber(),
+        };
+    }
+
+    public async getSupportedPower(nurseId: number): Promise<BigNumber> {
+        return await this.contract.supportedPower(nurseId);
     }
 
     public async assemble(nurseType: number) {

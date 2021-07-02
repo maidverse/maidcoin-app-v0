@@ -1,7 +1,9 @@
-import { BigNumber } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
 import Config from "../Config";
+import Wallet from "../ethereum/Wallet";
 import TheMasterArtifact from "./artifacts/contracts/TheMaster.sol/TheMaster.json";
 import Contract from "./Contract";
+import LPTokenContract from "./LPTokenContract";
 import { TheMaster } from "./typechain";
 
 export interface PoolInfo {
@@ -47,6 +49,39 @@ class TheMasterContract extends Contract<TheMaster> {
             accRewardPerShare,
             supply,
         };
+    }
+
+    public async support(pid: BigNumberish, lpTokenAmount: BigNumberish, supportTo: BigNumberish) {
+
+        const contract = await this.loadWalletContract();
+        const owner = await Wallet.loadAddress();
+        if (contract !== undefined && owner !== undefined) {
+
+            if (await LPTokenContract.allowance(owner, this.address) < lpTokenAmount) {
+
+                const deadline = Math.ceil(Date.now() / 1000) + 1000000;
+                const signed = await Wallet.signERC20Permit(
+
+                    await LPTokenContract.getName(),
+                    "1",
+                    LPTokenContract.address,
+
+                    this.address,
+                    lpTokenAmount,
+                    await LPTokenContract.getNonce(owner),
+                    deadline,
+                );
+
+                await contract.supportWithPermit(pid, lpTokenAmount, supportTo, deadline, signed.v, signed.r, signed.s);
+            } else {
+                await contract.support(pid, lpTokenAmount, supportTo);
+            }
+        }
+    }
+
+    public async desupport(pid: BigNumberish, lpTokenAmount: BigNumberish) {
+        const contract = await this.loadWalletContract();
+        await contract?.desupport(pid, lpTokenAmount);
     }
 }
 

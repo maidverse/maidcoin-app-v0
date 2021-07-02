@@ -6,11 +6,16 @@ interface NurseType {
     destroyReturn: BigNumber;
     power: number;
 }
+interface NurseInfo {
+    nurseType: number;
+}
 declare class CloneNurseContract extends ERC721Contract<CloneNurse> {
     constructor();
     getNurseTypeCount(): Promise<BigNumber>;
     addNurseType(partCount: BigNumberish, destroyReturn: BigNumber, power: BigNumberish): Promise<void>;
     getNurseType(nurseType: number): Promise<NurseType>;
+    getNurse(nurseId: number): Promise<NurseInfo>;
+    getSupportedPower(nurseId: number): Promise<BigNumber>;
     assemble(nurseType: number): Promise<void>;
 }
 declare const _default: CloneNurseContract;

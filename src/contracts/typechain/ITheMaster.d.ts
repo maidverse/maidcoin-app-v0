@@ -43,6 +43,8 @@ interface ITheMasterInterface extends ethers.utils.Interface {
     "set(uint256,uint256)": FunctionFragment;
     "startBlock()": FunctionFragment;
     "support(uint256,uint256,uint256)": FunctionFragment;
+    "supportWithPermit(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
+    "supportWithPermitMax(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)": FunctionFragment;
     "totalAllocPoint()": FunctionFragment;
     "userInfo(uint256,uint256)": FunctionFragment;
     "withdraw(uint256,uint256,uint256)": FunctionFragment;
@@ -143,6 +145,30 @@ interface ITheMasterInterface extends ethers.utils.Interface {
     values: [BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "supportWithPermit",
+    values: [
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "supportWithPermitMax",
+    values: [
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BigNumberish,
+      BytesLike,
+      BytesLike
+    ]
+  ): string;
+  encodeFunctionData(
     functionFragment: "totalAllocPoint",
     values?: undefined
   ): string;
@@ -209,6 +235,14 @@ interface ITheMasterInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "set", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "startBlock", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "support", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "supportWithPermit",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "supportWithPermitMax",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "totalAllocPoint",
     data: BytesLike
@@ -510,6 +544,50 @@ export class ITheMaster extends Contract {
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
+    supportWithPermit(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "supportWithPermit(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    supportWithPermitMax(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
+    "supportWithPermitMax(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<ContractTransaction>;
+
     totalAllocPoint(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "totalAllocPoint()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -800,6 +878,50 @@ export class ITheMaster extends Contract {
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
+  supportWithPermit(
+    pid: BigNumberish,
+    amount: BigNumberish,
+    supportTo: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "supportWithPermit(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+    pid: BigNumberish,
+    amount: BigNumberish,
+    supportTo: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  supportWithPermitMax(
+    pid: BigNumberish,
+    amount: BigNumberish,
+    supportTo: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
+  "supportWithPermitMax(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+    pid: BigNumberish,
+    amount: BigNumberish,
+    supportTo: BigNumberish,
+    deadline: BigNumberish,
+    v: BigNumberish,
+    r: BytesLike,
+    s: BytesLike,
+    overrides?: Overrides
+  ): Promise<ContractTransaction>;
+
   totalAllocPoint(overrides?: CallOverrides): Promise<BigNumber>;
 
   "totalAllocPoint()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1087,6 +1209,50 @@ export class ITheMaster extends Contract {
       pid: BigNumberish,
       amount: BigNumberish,
       supportTo: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    supportWithPermit(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "supportWithPermit(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    supportWithPermitMax(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "supportWithPermitMax(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1395,6 +1561,50 @@ export class ITheMaster extends Contract {
       overrides?: Overrides
     ): Promise<BigNumber>;
 
+    supportWithPermit(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "supportWithPermit(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    supportWithPermitMax(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
+    "supportWithPermitMax(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<BigNumber>;
+
     totalAllocPoint(overrides?: CallOverrides): Promise<BigNumber>;
 
     "totalAllocPoint()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1654,6 +1864,50 @@ export class ITheMaster extends Contract {
       pid: BigNumberish,
       amount: BigNumberish,
       supportTo: BigNumberish,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    supportWithPermit(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportWithPermit(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    supportWithPermitMax(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
+      overrides?: Overrides
+    ): Promise<PopulatedTransaction>;
+
+    "supportWithPermitMax(uint256,uint256,uint256,uint256,uint8,bytes32,bytes32)"(
+      pid: BigNumberish,
+      amount: BigNumberish,
+      supportTo: BigNumberish,
+      deadline: BigNumberish,
+      v: BigNumberish,
+      r: BytesLike,
+      s: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
