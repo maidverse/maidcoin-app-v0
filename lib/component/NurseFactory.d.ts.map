@@ -1,1 +1,1 @@
-{"version":3,"file":"NurseFactory.d.ts","sourceRoot":"","sources":["../../src/component/NurseFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAE,MAAM,gBAAgB,CAAC;AAEzC,MAAM,CAAC,OAAO,OAAO,YAAa,SAAQ,OAAO;;CAKhD"}
+{"version":3,"file":"NurseFactory.d.ts","sourceRoot":"","sources":["../../src/component/NurseFactory.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,OAAO,EAAM,MAAM,gBAAgB,CAAC;AAK7C,MAAM,CAAC,OAAO,OAAO,YAAa,SAAQ,OAAO;IAEjC,OAAO,CAAC,SAAS;gBAAT,SAAS,EAAE,MAAM;YAMvB,IAAI;CAiBrB"}

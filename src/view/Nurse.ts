@@ -2,42 +2,46 @@ import { DomNode, el } from "@hanul/skynode";
 import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
 import SkyUtil from "skyutil";
+import NurseFactory from "../component/NurseFactory";
 import NurseRaid from "../component/NurseRaid";
+import CloneNurseContract from "../contracts/CloneNurseContract";
 import NurseRaidContract from "../contracts/NurseRaidContract";
+import NetworkProvider from "../ethereum/NetworkProvider";
 import Layout from "./Layout";
 
 export default class Nurse implements View {
 
     private container: DomNode;
     private raidList: DomNode;
-    private nurseList: DomNode;
+    private nurseFactoryList: DomNode;
 
     constructor() {
         Layout.current.content.append(this.container = el("#nurse",
             "Nurse!",
             this.raidList = el(".raid-list"),
-            this.nurseList = el(".nurse-list"),
+            this.nurseFactoryList = el(".nurse-factory-list"),
         ));
         this.loadRaids();
-        this.loadNurses();
+        this.loadNurseParts();
     }
 
     private async loadRaids() {
         const raidCount = await NurseRaidContract.getRaidCount();
+        this.raidList.appendText(`Current Block: ${String(await NetworkProvider.getBlockNumber())}`);
         this.raidList.appendText(`Total Raids: ${raidCount}`);
 
         SkyUtil.repeat(raidCount.toNumber(), async (raidId) => {
-            const nurseRaid = new NurseRaid(raidId).appendTo(this.raidList);
-            nurseRaid.raid = await NurseRaidContract.getRaid(raidId);
+            new NurseRaid(raidId).appendTo(this.raidList);
         });
     }
 
-    private async loadNurses() {
-        //const nurseCount = await CloneNuresContract.getNurseCount();
-        //this.raidList.appendText(`Total Nurses: ${nurseCount}`);
+    private async loadNurseParts() {
+        const nurseTypeCount = await CloneNurseContract.getNurseTypeCount();
+        this.nurseFactoryList.appendText(`Total Nurse Types: ${nurseTypeCount}`);
 
-        //SkyUtil.repeat(nurseCount.toNumber(), async (nurseId) => {
-        //});
+        SkyUtil.repeat(nurseTypeCount.toNumber(), async (nurseType) => {
+            new NurseFactory(nurseType).appendTo(this.nurseFactoryList);
+        });
     }
 
     public changeParams(params: ViewParams, uri: string): void { }

@@ -1,4 +1,4 @@
-import { BigNumber, ContractInterface, ethers } from "ethers";
+import { BigNumber, BigNumberish, ContractInterface, ethers } from "ethers";
 import Contract from "../Contract";
 
 export default abstract class ERC1155Contract<CT extends ethers.Contract> extends Contract<CT> {
@@ -18,5 +18,13 @@ export default abstract class ERC1155Contract<CT extends ethers.Contract> extend
 
     public async getNonce(owner: string): Promise<BigNumber> {
         return await this.contract.nonces(owner);
+    }
+
+    public async isApprovedForAll(owner: string, operator: string): Promise<boolean> {
+        return await this.contract.isApprovedForAll(owner, operator);
+    }
+
+    public async balanceOf(owner: string, id: BigNumberish): Promise<BigNumber> {
+        return await this.contract.balanceOf(owner, id);
     }
 }

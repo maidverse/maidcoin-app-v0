@@ -31,10 +31,6 @@ class MaidContract extends ERC721Contract<Maid> {
         await contract?.mint(power);
     }
 
-    public async isApprovedForAll(owner: string, operator: string): Promise<boolean> {
-        return await this.contract.isApprovedForAll(owner, operator);
-    }
-
     public async support(id: BigNumberish, lpTokenAmount: BigNumberish) {
 
         const contract = await this.loadWalletContract();

@@ -15,6 +15,10 @@ export default abstract class ERC721Contract<CT extends ethers.Contract> extends
         return await this.contract.name();
     }
 
+    public async getTotalSupply(): Promise<BigNumber> {
+        return await this.contract.totalSupply();
+    }
+
     public async getNonce(id: BigNumberish): Promise<BigNumber> {
         return await this.contract.nonces(id);
     }
@@ -23,7 +27,7 @@ export default abstract class ERC721Contract<CT extends ethers.Contract> extends
         return await this.contract.noncesForAll(owner);
     }
 
-    public async getTotalSupply(): Promise<BigNumber> {
-        return await this.contract.totalSupply();
+    public async isApprovedForAll(owner: string, operator: string): Promise<boolean> {
+        return await this.contract.isApprovedForAll(owner, operator);
     }
 }

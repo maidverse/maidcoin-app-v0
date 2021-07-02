@@ -36,6 +36,7 @@ interface CloneNurseInterface extends ethers.utils.Interface {
     "maidCoin()": FunctionFragment;
     "name()": FunctionFragment;
     "nursePart()": FunctionFragment;
+    "nurseTypeCount()": FunctionFragment;
     "nurseTypes(uint256)": FunctionFragment;
     "nurses(uint256)": FunctionFragment;
     "onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": FunctionFragment;
@@ -104,6 +105,10 @@ interface CloneNurseInterface extends ethers.utils.Interface {
   encodeFunctionData(functionFragment: "maidCoin", values?: undefined): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "nursePart", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "nurseTypeCount",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "nurseTypes",
     values: [BigNumberish]
@@ -228,6 +233,10 @@ interface CloneNurseInterface extends ethers.utils.Interface {
   decodeFunctionResult(functionFragment: "maidCoin", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nursePart", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "nurseTypeCount",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "nurseTypes", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nurses", data: BytesLike): Result;
   decodeFunctionResult(
@@ -372,17 +381,17 @@ export class CloneNurse extends Contract {
     ): Promise<ContractTransaction>;
 
     assemble(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     "assemble(uint256)"(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
     assembleWithPermit(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -391,7 +400,7 @@ export class CloneNurse extends Contract {
     ): Promise<ContractTransaction>;
 
     "assembleWithPermit(uint256,uint256,uint8,bytes32,bytes32)"(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -483,6 +492,10 @@ export class CloneNurse extends Contract {
     nursePart(overrides?: CallOverrides): Promise<[string]>;
 
     "nursePart()"(overrides?: CallOverrides): Promise<[string]>;
+
+    nurseTypeCount(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    "nurseTypeCount()"(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     nurseTypes(
       arg0: BigNumberish,
@@ -778,17 +791,17 @@ export class CloneNurse extends Contract {
   ): Promise<ContractTransaction>;
 
   assemble(
-    nurserType: BigNumberish,
+    _nurseType: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   "assemble(uint256)"(
-    nurserType: BigNumberish,
+    _nurseType: BigNumberish,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
   assembleWithPermit(
-    nurserType: BigNumberish,
+    nurseType: BigNumberish,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -797,7 +810,7 @@ export class CloneNurse extends Contract {
   ): Promise<ContractTransaction>;
 
   "assembleWithPermit(uint256,uint256,uint8,bytes32,bytes32)"(
-    nurserType: BigNumberish,
+    nurseType: BigNumberish,
     deadline: BigNumberish,
     v: BigNumberish,
     r: BytesLike,
@@ -886,6 +899,10 @@ export class CloneNurse extends Contract {
   nursePart(overrides?: CallOverrides): Promise<string>;
 
   "nursePart()"(overrides?: CallOverrides): Promise<string>;
+
+  nurseTypeCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+  "nurseTypeCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
   nurseTypes(
     arg0: BigNumberish,
@@ -1172,17 +1189,17 @@ export class CloneNurse extends Contract {
     ): Promise<void>;
 
     assemble(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "assemble(uint256)"(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
 
     assembleWithPermit(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -1191,7 +1208,7 @@ export class CloneNurse extends Contract {
     ): Promise<void>;
 
     "assembleWithPermit(uint256,uint256,uint8,bytes32,bytes32)"(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -1280,6 +1297,10 @@ export class CloneNurse extends Contract {
     nursePart(overrides?: CallOverrides): Promise<string>;
 
     "nursePart()"(overrides?: CallOverrides): Promise<string>;
+
+    nurseTypeCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nurseTypeCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nurseTypes(
       arg0: BigNumberish,
@@ -1623,17 +1644,17 @@ export class CloneNurse extends Contract {
     ): Promise<BigNumber>;
 
     assemble(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     "assemble(uint256)"(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
     assembleWithPermit(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -1642,7 +1663,7 @@ export class CloneNurse extends Contract {
     ): Promise<BigNumber>;
 
     "assembleWithPermit(uint256,uint256,uint8,bytes32,bytes32)"(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -1731,6 +1752,10 @@ export class CloneNurse extends Contract {
     nursePart(overrides?: CallOverrides): Promise<BigNumber>;
 
     "nursePart()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    nurseTypeCount(overrides?: CallOverrides): Promise<BigNumber>;
+
+    "nurseTypeCount()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     nurseTypes(
       arg0: BigNumberish,
@@ -2012,17 +2037,17 @@ export class CloneNurse extends Contract {
     ): Promise<PopulatedTransaction>;
 
     assemble(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     "assemble(uint256)"(
-      nurserType: BigNumberish,
+      _nurseType: BigNumberish,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     assembleWithPermit(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -2031,7 +2056,7 @@ export class CloneNurse extends Contract {
     ): Promise<PopulatedTransaction>;
 
     "assembleWithPermit(uint256,uint256,uint8,bytes32,bytes32)"(
-      nurserType: BigNumberish,
+      nurseType: BigNumberish,
       deadline: BigNumberish,
       v: BigNumberish,
       r: BytesLike,
@@ -2126,6 +2151,12 @@ export class CloneNurse extends Contract {
     nursePart(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "nursePart()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    nurseTypeCount(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    "nurseTypeCount()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     nurseTypes(
       arg0: BigNumberish,

@@ -2,7 +2,7 @@ import { DomNode, el } from "@hanul/skynode";
 import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
 import SkyUtil from "skyutil";
-import MaidSummary from "../component/maid/MaidSummary";
+import MaidSummary from "../component/MaidSummary";
 import MaidContract from "../contracts/MaidContract";
 import Layout from "./Layout";
 
@@ -24,8 +24,7 @@ export default class Maid implements View {
         this.maidList.appendText(`Total Maids: ${maidCount}`);
 
         SkyUtil.repeat(maidCount.toNumber(), async (maidId) => {
-            const maidSummary = new MaidSummary(maidId).appendTo(this.maidList);
-            maidSummary.maid = await MaidContract.getMaid(maidId);
+            new MaidSummary(maidId).appendTo(this.maidList);
         });
     }
 

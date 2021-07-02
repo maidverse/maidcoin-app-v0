@@ -1,6 +1,6 @@
 import { DomNode, el } from "@hanul/skynode";
 import { utils } from "ethers";
-import NurseRaidContract, { RaidInfo } from "../contracts/NurseRaidContract";
+import NurseRaidContract from "../contracts/NurseRaidContract";
 import Wallet from "../ethereum/Wallet";
 
 export default class NurseRaid extends DomNode {
@@ -8,10 +8,12 @@ export default class NurseRaid extends DomNode {
     constructor(private raidId: number) {
         super(".nurse-raid");
         this.append(el("", "Loading..."));
+        this.load();
         this.loadChallenger();
     }
 
-    public set raid(raid: RaidInfo) {
+    private async load() {
+        const raid = await NurseRaidContract.getRaid(this.raidId);
         this.empty().append(
 
             el("", `Raid #${this.raidId}`),

@@ -3,10 +3,10 @@ import { ViewParams } from "skyrouter/lib/View";
 export default class Nurse implements View {
     private container;
     private raidList;
-    private nurseList;
+    private nurseFactoryList;
     constructor();
     private loadRaids;
-    private loadNurses;
+    private loadNurseParts;
     changeParams(params: ViewParams, uri: string): void;
     close(): void;
 }

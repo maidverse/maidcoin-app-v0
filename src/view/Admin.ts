@@ -2,6 +2,7 @@ import { DomNode, el } from "@hanul/skynode";
 import { utils } from "ethers";
 import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
+import CloneNurseContract from "../contracts/CloneNurseContract";
 import MaidContract from "../contracts/MaidContract";
 import NurseRaidContract from "../contracts/NurseRaidContract";
 import NetworkProvider from "../ethereum/NetworkProvider";
@@ -19,6 +20,10 @@ export default class Admin implements View {
         let maxRewardCountInput: DomNode<HTMLInputElement>;
         let durationInput: DomNode<HTMLInputElement>;
         let endBlockInput: DomNode<HTMLInputElement>;
+
+        let partCountInput: DomNode<HTMLInputElement>;
+        let destroyReturnInput: DomNode<HTMLInputElement>;
+        let powerInput: DomNode<HTMLInputElement>;
 
         Layout.current.content.append(this.container = el("#admin",
             el("h2", "Admin Console"),
@@ -46,6 +51,20 @@ export default class Admin implements View {
                                 parseInt(maxRewardCountInput.domElement.value, 10),
                                 parseInt(durationInput.domElement.value, 10),
                                 parseInt(endBlockInput.domElement.value, 10),
+                            );
+                        },
+                    }),
+                ),
+                el(".create-nurse-type-form",
+                    partCountInput = el("input", { placeholder: "Part Count" }),
+                    destroyReturnInput = el("input", { placeholder: "Destroy Return" }),
+                    powerInput = el("input", { placeholder: "Power" }),
+                    el("a.create-nurse-type-button", "Create Nurse Type", {
+                        click: async () => {
+                            await CloneNurseContract.addNurseType(
+                                parseInt(partCountInput.domElement.value, 10),
+                                utils.parseEther(destroyReturnInput.domElement.value),
+                                parseInt(powerInput.domElement.value, 10),
                             );
                         },
                     }),

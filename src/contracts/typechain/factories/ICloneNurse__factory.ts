@@ -221,7 +221,7 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "nurserType",
+        name: "nurseType",
         type: "uint256",
       },
     ],
@@ -234,7 +234,7 @@ const _abi = [
     inputs: [
       {
         internalType: "uint256",
-        name: "nurserType",
+        name: "nurseType",
         type: "uint256",
       },
       {
@@ -432,6 +432,19 @@ const _abi = [
         internalType: "contract INursePart",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "nurseTypeCount",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
