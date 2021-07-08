@@ -1,6 +1,7 @@
 import { BodyNode, DomNode, el } from "@hanul/skynode";
 import { SkyRouter, View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
+import Menu from "../component/Menu";
 import UserInfo from "../component/UserInfo";
 
 export default class Layout implements View {
@@ -25,7 +26,9 @@ export default class Layout implements View {
                     el("a", "Test LP Token", { click: () => SkyRouter.go("/test-lp-token") }),
                 ),
                 new UserInfo(),
-                el("a.more-button.fas.fa-ellipsis-h"),
+                el("a.more-button.fas.fa-ellipsis-h", {
+                    click: (event) => new Menu({ left: event.x, top: event.y }).appendTo(BodyNode),
+                }),
             ),
             this.content = el("main"),
         ));

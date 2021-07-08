@@ -5,6 +5,7 @@ declare class NetworkProvider extends EventContainer {
     signer: ethers.providers.JsonRpcSigner;
     constructor();
     getBlockNumber(): Promise<number>;
+    getBalance(address: string): Promise<ethers.BigNumber>;
 }
 declare const _default: NetworkProvider;
 export default _default;

@@ -12,7 +12,12 @@ declare class Wallet extends EventContainer {
     loadChainId(): Promise<number>;
     connected(): Promise<boolean>;
     connect(): Promise<void>;
-    signTypedData(owner: string | undefined, deadline: number, name: string, version: string, verifyingContract: string, Permit: {
+    changeNetwork(chainId: number, chainName: string, currency: {
+        name: string;
+        symbol: string;
+        decimals: number;
+    }, rpc: string, blockExplorer?: string): Promise<void>;
+    signTypedData(owner: string | undefined, name: string, version: string, verifyingContract: string, Permit: {
         name: string;
         type: string;
     }[], message: any): Promise<{

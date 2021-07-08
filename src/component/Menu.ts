@@ -1,8 +1,12 @@
-import { DomNode } from "@hanul/skynode";
+import { ClosableFloatingDomNode, el, Position } from "@hanul/skynode";
 
-export default class Menu extends DomNode {
+export default class Menu extends ClosableFloatingDomNode {
 
-    constructor() {
-        super(".menu");
+    constructor(position: Position) {
+        super(position, ".menu");
+        this.append(
+            el("", "Menu"),
+        );
+        this.putInsideWindow();
     }
 }
