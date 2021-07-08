@@ -43,7 +43,7 @@ module.exports = {
             stream: require.resolve("stream-browserify"),
             assert: require.resolve("assert/"),
             crypto: require.resolve("crypto-browserify")
-        }
+        },
     },
     output: {
         filename: '[name].js',

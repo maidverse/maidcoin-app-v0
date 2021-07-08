@@ -16,6 +16,10 @@ class NetworkProvider extends EventContainer {
     public async getBlockNumber() {
         return await this.provider.getBlockNumber();
     }
+
+    public async getBalance(address: string) {
+        return await this.provider.getBalance(address);
+    }
 }
 
 export default new NetworkProvider();

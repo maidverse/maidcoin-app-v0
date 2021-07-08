@@ -23,7 +23,7 @@ class Wallet extends EventContainer {
                 this.fireEvent("chainchange", BigNumber.from(chainId).toNumber());
             });
         } else {
-            this.walletConnectProvider = new WalletConnectProvider({ infuraId: Config.infuraId });
+            this.walletConnectProvider = new WalletConnectProvider({ rpc: Config.rpc });
             this.provider = new ethers.providers.Web3Provider(this.walletConnectProvider);
             this.walletConnectProvider.on("chainChanged", (chainId: number) => {
                 this.fireEvent("chainchange", chainId);
@@ -64,9 +64,47 @@ class Wallet extends EventContainer {
         this.checkConnected();
     }
 
+    public async changeNetwork(
+        chainId: number,
+        chainName: string,
+        currency: {
+            name: string,
+            symbol: string,
+            decimals: number,
+        },
+        rpc: string,
+        blockExplorer?: string,
+    ) {
+
+        let provider;
+        if (this.existsInjectedProvider === true) {
+            provider = this.ethereum;
+        } else {
+            provider = this.walletConnectProvider;
+        }
+
+        if (provider !== undefined) {
+
+            await provider.request({
+                method: "wallet_addEthereumChain", params: [{
+                    chainId: ethers.utils.hexlify(chainId),
+                    chainName,
+                    nativeCurrency: currency,
+                    rpcUrls: [rpc],
+                    blockExplorerUrls: blockExplorer === undefined ? [] : [blockExplorer]
+                }],
+            });
+
+            await provider.request({
+                method: "wallet_switchEthereumChain", params: [{
+                    chainId: ethers.utils.hexlify(chainId),
+                }],
+            });
+        }
+    }
+
     public async signTypedData(
         owner: string | undefined,
-        deadline: number,
 
         name: string,
         version: string,
@@ -152,7 +190,7 @@ class Wallet extends EventContainer {
             deadline: BigNumber.from(deadline).toString(),
         };
 
-        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
+        return await this.signTypedData(owner, name, version, verifyingContract, Permit, message);
     }
 
     public async signERC721Permit(
@@ -182,7 +220,7 @@ class Wallet extends EventContainer {
             deadline: BigNumber.from(deadline).toString(),
         };
 
-        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
+        return await this.signTypedData(owner, name, version, verifyingContract, Permit, message);
     }
 
     public async signERC721PermitAll(
@@ -211,7 +249,7 @@ class Wallet extends EventContainer {
             deadline: BigNumber.from(deadline).toString(),
         };
 
-        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
+        return await this.signTypedData(owner, name, version, verifyingContract, Permit, message);
     }
 
     public async signERC1155Permit(
@@ -240,7 +278,7 @@ class Wallet extends EventContainer {
             deadline: BigNumber.from(deadline).toString(),
         };
 
-        return await this.signTypedData(owner, deadline, name, version, verifyingContract, Permit, message);
+        return await this.signTypedData(owner, name, version, verifyingContract, Permit, message);
     }
 }
 

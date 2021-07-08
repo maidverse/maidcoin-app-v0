@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "webpack": "webpack --mode development --watch --config webpack.config.js"
+    "webpack-dev": "webpack --mode development --watch --config webpack.config.dev.js",
+    "webpack-prod": "webpack --mode production --config webpack.config.prod.js"
   },
   "dependencies": {
     "@hanul/skynode": "^0.0.9",
