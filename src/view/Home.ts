@@ -9,7 +9,11 @@ export default class Home implements View {
 
     constructor() {
         Layout.current.content.append(this.container = el("#home",
-            "Home!",
+            el("header",
+                el("h2", "MaidCoin"),
+                el("p", "Defeat Nurses with Maids and save mankind!"),
+                el("a.detail-button", "Read More", { href: "https://maidcoin.org" }),
+            ),
         ));
     }
 

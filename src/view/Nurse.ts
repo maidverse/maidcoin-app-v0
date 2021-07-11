@@ -17,7 +17,8 @@ export default class Nurse implements View {
 
     constructor() {
         Layout.current.content.append(this.container = el("#nurse",
-            "Nurse!",
+            el("h2", "Nurse"),
+            el("p", "Defeat Nurses and get Nurse Parts.\nYou can make Clone Nurses with Nurse Parts."),
             this.raidList = el(".raid-list"),
             this.nurseFactoryList = el(".nurse-factory-list"),
         ));

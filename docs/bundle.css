@@ -170,6 +170,10 @@ a {
 }
 .menu {
   position: fixed;
+  z-index: 999;
+  background-color: #dfdcd7;
+  border: 1px solid #363138;
+  color: #363138;
 }
 .maid-list > .total-count {
   text-align: right;
@@ -204,13 +208,13 @@ a {
 .maid-summary > .info > .property {
   margin-top: 5px;
 }
-.maid-summary > .info > .controller {
+.maid-summary > .info > .control {
   position: absolute;
   bottom: 0;
   right: 0;
   padding: 10px 20px;
 }
-.maid-summary > .info > .controller:after {
+.maid-summary > .info > .control:after {
   content: " ";
   display: block;
   font-size: 0;
@@ -218,7 +222,7 @@ a {
   clear: both;
   visibility: hidden;
 }
-.maid-summary > .info > .controller > .support-button {
+.maid-summary > .info > .control > .support-button {
   float: right;
   background-color: #dfdcd7;
   border: 1px solid #363138;
@@ -226,7 +230,7 @@ a {
   padding: 10px 20px;
   border-radius: 50px;
 }
-.maid-summary > .info > .controller > .support-button:hover {
+.maid-summary > .info > .control > .support-button:hover {
   background-color: #363138;
   color: #dfdcd7;
 }
@@ -295,7 +299,7 @@ a {
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 999;
+  z-index: 998;
 }
 #layout > header img.logo {
   display: block;
@@ -329,6 +333,36 @@ a {
   margin-top: 20px;
   text-align: right;
 }
+#home {
+  padding: 60px 0;
+}
+#home > header > h2 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #363138;
+  margin-bottom: 20px;
+  text-align: center;
+}
+#home > header > p {
+  color: #363138;
+  margin-bottom: 20px;
+  text-align: center;
+}
+#home > header > .detail-button {
+  background-color: #dfdcd7;
+  border: 1px solid #363138;
+  color: #363138;
+  padding: 10px;
+  border-radius: 50px;
+  width: 200px;
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+#home > header > .detail-button:hover {
+  background-color: #363138;
+  color: #dfdcd7;
+}
 #maid {
   padding: 60px 0;
 }
@@ -343,6 +377,30 @@ a {
 }
 #maid > .maid-list {
   margin-top: 30px;
+}
+#nurse {
+  padding: 60px 0;
+}
+#nurse > h2 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #363138;
+  margin-bottom: 20px;
+}
+#nurse > p {
+  color: #564f5b;
+}
+#earn {
+  padding: 60px 0;
+}
+#earn > h2 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #363138;
+  margin-bottom: 20px;
+}
+#earn > p {
+  color: #564f5b;
 }
 #admin {
   padding: 60px 0;
@@ -399,6 +457,42 @@ a {
   border-radius: 50px;
 }
 #admin > .admin-form > .action-button-container > .action-button:hover {
+  background-color: #363138;
+  color: #dfdcd7;
+}
+#test-lp-token {
+  padding: 60px 0;
+}
+#test-lp-token > h2 {
+  font-size: 48px;
+  font-weight: bold;
+  color: #564f5b;
+  margin-bottom: 20px;
+}
+#test-lp-token > .info {
+  line-height: 1.5em;
+  color: #564f5b;
+}
+#test-lp-token > .control {
+  margin-top: 20px;
+}
+#test-lp-token > .control:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+#test-lp-token > .control > .mint-button {
+  float: left;
+  background-color: #dfdcd7;
+  border: 1px solid #363138;
+  color: #363138;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+#test-lp-token > .control > .mint-button:hover {
   background-color: #363138;
   color: #dfdcd7;
 }

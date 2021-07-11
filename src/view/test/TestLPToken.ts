@@ -12,9 +12,11 @@ export default class TestLPToken implements View {
     private info: DomNode;
 
     constructor() {
-        Layout.current.content.append(this.container = el("#test-view",
-            "TestLPToken",
-            this.info = el(".info"),
+        Layout.current.content.append(this.container = el("#test-lp-token",
+            el("h2", "Test LP Token"),
+            this.info = el(".info",
+                el(".loading", "Loading..."),
+            ),
             el(".control",
                 el("a.mint-button", "Mint", {
                     click: async () => {

@@ -15,7 +15,8 @@ export default class Earn implements View {
 
     constructor() {
         Layout.current.content.append(this.container = el("#earn",
-            "Earn!",
+            el("h2", "Earn"),
+            el("p", "Earn MaidCoin!"),
             this.poolList = el(".pool-list"),
             this.nurseList = el(".nurse-list"),
         ));
