@@ -2,9 +2,7 @@ import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
 export default class Maid implements View {
     private container;
-    private maidList;
     constructor();
-    private loadMaids;
     changeParams(params: ViewParams, uri: string): void;
     close(): void;
 }

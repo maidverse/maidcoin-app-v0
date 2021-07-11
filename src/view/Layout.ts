@@ -31,6 +31,7 @@ export default class Layout implements View {
                 }),
             ),
             this.content = el("main"),
+            el("footer", "All rights reserved, MaidCoin"),
         ));
     }
 

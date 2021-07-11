@@ -1,7 +1,7 @@
 import { DomNode, el } from "@hanul/skynode";
-import CloneNurseContract from "../contracts/CloneNurseContract";
-import NursePartContract from "../contracts/NursePartContract";
-import Wallet from "../ethereum/Wallet";
+import CloneNurseContract from "../../contracts/CloneNurseContract";
+import NursePartContract from "../../contracts/NursePartContract";
+import Wallet from "../../ethereum/Wallet";
 
 export default class NurseFactory extends DomNode {
 

@@ -1,31 +1,19 @@
 import { DomNode, el } from "@hanul/skynode";
 import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
-import SkyUtil from "skyutil";
-import MaidSummary from "../component/MaidSummary";
-import MaidContract from "../contracts/MaidContract";
+import MaidList from "../component/maid/MaidList";
 import Layout from "./Layout";
 
 export default class Maid implements View {
 
     private container: DomNode;
-    private maidList: DomNode;
 
     constructor() {
         Layout.current.content.append(this.container = el("#maid",
-            "Maid!",
-            this.maidList = el(".maid-list"),
+            el("h2", "Maids"),
+            el("p.description", "Maids helps humanity fight the Nurse."),
+            new MaidList(),
         ));
-        this.loadMaids();
-    }
-
-    private async loadMaids() {
-        const maidCount = await MaidContract.getTotalSupply();
-        this.maidList.appendText(`Total Maids: ${maidCount}`);
-
-        SkyUtil.repeat(maidCount.toNumber(), async (maidId) => {
-            new MaidSummary(maidId).appendTo(this.maidList);
-        });
     }
 
     public changeParams(params: ViewParams, uri: string): void { }

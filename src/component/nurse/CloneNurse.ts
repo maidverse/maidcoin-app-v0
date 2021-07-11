@@ -1,7 +1,7 @@
 import { DomNode, el } from "@hanul/skynode";
 import { utils } from "ethers";
-import CloneNurseContract from "../contracts/CloneNurseContract";
-import TheMasterContract from "../contracts/TheMasterContract";
+import CloneNurseContract from "../../contracts/CloneNurseContract";
+import TheMasterContract from "../../contracts/TheMasterContract";
 
 export default class CloneNurse extends DomNode {
 

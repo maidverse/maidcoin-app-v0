@@ -1,7 +1,7 @@
 import { DomNode, el } from "@hanul/skynode";
 import { utils } from "ethers";
-import NurseRaidContract from "../contracts/NurseRaidContract";
-import Wallet from "../ethereum/Wallet";
+import NurseRaidContract from "../../contracts/NurseRaidContract";
+import Wallet from "../../ethereum/Wallet";
 
 export default class NurseRaid extends DomNode {
 

@@ -2,7 +2,7 @@ import { DomNode, el } from "@hanul/skynode";
 import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
 import SkyUtil from "skyutil";
-import CloneNurse from "../component/CloneNurse";
+import CloneNurse from "../component/nurse/CloneNurse";
 import CloneNurseContract from "../contracts/CloneNurseContract";
 import TheMasterContract from "../contracts/TheMasterContract";
 import Layout from "./Layout";
