@@ -279,13 +279,34 @@ a {
   color: #dfdcd7;
   font-size: 30px;
 }
+.nurse-raid-list > .total-count {
+  text-align: right;
+  color: #564f5b;
+}
+.nurse-raid-list > .raid-container > .nurse-raid {
+  margin-top: 20px;
+}
 .nurse-raid {
   padding: 20px;
   background-color: #bcb5bc;
 }
+.nurse-factory-list > .total-count {
+  text-align: right;
+  color: #564f5b;
+}
+.nurse-factory-list > .factory-container > .nurse-factory {
+  margin-top: 20px;
+}
 .nurse-factory {
   padding: 20px;
   background-color: #bcb5bc;
+}
+.clone-nurse-list > .total-count {
+  text-align: right;
+  color: #564f5b;
+}
+.clone-nurse-list > .clone-nurse-container > .clone-nurse {
+  margin-top: 20px;
 }
 #layout {
   padding-top: 64px;
@@ -389,6 +410,9 @@ a {
 }
 #nurse > p {
   color: #564f5b;
+}
+#nurse > .nurse-raid-list {
+  margin-bottom: 50px;
 }
 #earn {
   padding: 60px 0;
