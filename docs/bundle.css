@@ -335,8 +335,59 @@ a {
   margin-top: 20px;
 }
 .nurse-raid {
-  padding: 20px;
   background-color: #bcb5bc;
+  display: flex;
+  position: relative;
+  height: 200px;
+  cursor: pointer;
+}
+.nurse-raid > .loading {
+  padding: 20px;
+}
+.nurse-raid > .image {
+  height: 200px;
+}
+.nurse-raid > .info {
+  flex-grow: 1;
+  padding: 15px;
+}
+.nurse-raid > .info > h4 {
+  font-weight: bold;
+  font-size: 30px;
+  color: #363138;
+  margin-bottom: 10px;
+}
+.nurse-raid > .info > .property {
+  margin-top: 5px;
+}
+.nurse-raid > .info > .control {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+}
+.nurse-raid > .info > .control:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.nurse-raid > .info > .control > .enter-button,
+.nurse-raid > .info > .control > .exit-button {
+  float: left;
+  margin-left: 10px;
+  background-color: #dfdcd7;
+  border: 1px solid #363138;
+  color: #363138;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+.nurse-raid > .info > .control > .enter-button:hover,
+.nurse-raid > .info > .control > .exit-button:hover {
+  background-color: #363138;
+  color: #dfdcd7;
 }
 .nurse-factory-list > .total-count {
   text-align: right;
@@ -361,8 +412,110 @@ a {
   margin-top: 20px;
 }
 .nurse-factory {
-  padding: 20px;
   background-color: #bcb5bc;
+  display: flex;
+  position: relative;
+  height: 200px;
+  cursor: pointer;
+}
+.nurse-factory > .loading {
+  padding: 20px;
+}
+.nurse-factory > .image {
+  height: 200px;
+}
+.nurse-factory > .info {
+  flex-grow: 1;
+  padding: 15px;
+}
+.nurse-factory > .info > h4 {
+  font-weight: bold;
+  font-size: 30px;
+  color: #363138;
+  margin-bottom: 10px;
+}
+.nurse-factory > .info > .property {
+  margin-top: 5px;
+}
+.nurse-factory > .info > .control {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+}
+.nurse-factory > .info > .control:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.nurse-factory > .info > .control > .assemble-button {
+  float: right;
+  background-color: #dfdcd7;
+  border: 1px solid #363138;
+  color: #363138;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+.nurse-factory > .info > .control > .assemble-button:hover {
+  background-color: #363138;
+  color: #dfdcd7;
+}
+.clone-nurse {
+  background-color: #bcb5bc;
+  display: flex;
+  position: relative;
+  height: 200px;
+  cursor: pointer;
+}
+.clone-nurse > .loading {
+  padding: 20px;
+}
+.clone-nurse > .image {
+  height: 200px;
+}
+.clone-nurse > .info {
+  flex-grow: 1;
+  padding: 15px;
+}
+.clone-nurse > .info > h4 {
+  font-weight: bold;
+  font-size: 30px;
+  color: #363138;
+  margin-bottom: 10px;
+}
+.clone-nurse > .info > .property {
+  margin-top: 5px;
+}
+.clone-nurse > .info > .control {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+}
+.clone-nurse > .info > .control:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clone-nurse > .info > .control > .support-button,
+.clone-nurse > .info > .control > .desupport-button {
+  float: right;
+  background-color: #dfdcd7;
+  border: 1px solid #363138;
+  color: #363138;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+.clone-nurse > .info > .control > .support-button:hover,
+.clone-nurse > .info > .control > .desupport-button:hover {
+  background-color: #363138;
+  color: #dfdcd7;
 }
 #layout {
   padding-top: 64px;

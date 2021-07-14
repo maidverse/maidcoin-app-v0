@@ -1,4 +1,55 @@
 .nurse-raid {
-    padding         : 20px;
     background-color: #bcb5bc;
+    display         : flex;
+    position        : relative;
+    height          : 200px;
+    cursor          : pointer;
+
+    >.loading {
+        padding: 20px;
+    }
+
+    >.image {
+        height: 200px;
+    }
+
+    >.info {
+        flex-grow: 1;
+        padding  : 15px;
+
+        >h4 {
+            font-weight  : bold;
+            font-size    : 30px;
+            color        : #363138;
+            margin-bottom: 10px;
+        }
+
+        >.property {
+            margin-top: 5px;
+        }
+
+        >.control {
+            position: absolute;
+            bottom  : 0;
+            right   : 0;
+            padding : 10px 20px;
+            .float-wrapper();
+
+            >.enter-button,
+            >.exit-button {
+                float           : left;
+                margin-left     : 10px;
+                background-color: #dfdcd7;
+                border          : 1px solid #363138;
+                color           : #363138;
+                padding         : 10px 20px;
+                border-radius   : 50px;
+
+                &:hover {
+                    background-color: #363138;
+                    color           : #dfdcd7;
+                }
+            }
+        }
+    }
 }
