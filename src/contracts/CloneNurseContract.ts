@@ -56,6 +56,10 @@ class CloneNurseContract extends ERC721Contract<CloneNurse> {
         return await this.contract.supportedPower(nurseId);
     }
 
+    public async getSupportingTo(supporter: string): Promise<BigNumber> {
+        return await this.contract.supportingTo(supporter);
+    }
+
     public async assemble(nurseType: number) {
 
         const contract = await this.loadWalletContract();

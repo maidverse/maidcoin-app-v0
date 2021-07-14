@@ -14,7 +14,8 @@ export interface PoolInfo {
 declare class TheMasterContract extends Contract<TheMaster> {
     constructor();
     getPoolCount(): Promise<BigNumber>;
-    getPool(poolId: number): Promise<PoolInfo>;
+    getPool(poolId: BigNumberish): Promise<PoolInfo>;
+    getSupportingAmount(user: string): Promise<BigNumber>;
     support(pid: BigNumberish, lpTokenAmount: BigNumberish, supportTo: BigNumberish): Promise<void>;
     desupport(pid: BigNumberish, lpTokenAmount: BigNumberish): Promise<void>;
 }

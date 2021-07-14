@@ -32,7 +32,7 @@ export default class Earn implements View {
         this.poolList.appendText(`Total Pools: ${poolCount}`);
 
         SkyUtil.repeat(poolCount.toNumber(), async (poolId) => {
-            console.log(await TheMasterContract.getPool(poolId));
+            console.log(poolId, await TheMasterContract.getPool(poolId));
         });
 
         const nurseCount = await CloneNurseContract.getTotalSupply();

@@ -28,7 +28,7 @@ class TheMasterContract extends Contract<TheMaster> {
         return await this.contract.poolCount();
     }
 
-    public async getPool(poolId: number): Promise<PoolInfo> {
+    public async getPool(poolId: BigNumberish): Promise<PoolInfo> {
         const [
             addr,
             delegate,
@@ -49,6 +49,11 @@ class TheMasterContract extends Contract<TheMaster> {
             accRewardPerShare,
             supply,
         };
+    }
+
+    public async getSupportingAmount(user: string) {
+        const [amount] = await this.contract.userInfo(3, BigNumber.from(user));
+        return amount;
     }
 
     public async support(pid: BigNumberish, lpTokenAmount: BigNumberish, supportTo: BigNumberish) {

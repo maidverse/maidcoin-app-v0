@@ -16,6 +16,7 @@ declare class CloneNurseContract extends ERC721Contract<CloneNurse> {
     getNurseType(nurseType: number): Promise<NurseType>;
     getNurse(nurseId: number): Promise<NurseInfo>;
     getSupportedPower(nurseId: number): Promise<BigNumber>;
+    getSupportingTo(supporter: string): Promise<BigNumber>;
     assemble(nurseType: number): Promise<void>;
 }
 declare const _default: CloneNurseContract;
