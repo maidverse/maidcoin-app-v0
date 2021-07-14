@@ -27,7 +27,10 @@ export default class Layout implements View {
                 ),
                 new UserInfo(),
                 el("a.more-button.fas.fa-ellipsis-h", {
-                    click: (event) => new Menu({ left: event.x, top: event.y }).appendTo(BodyNode),
+                    click: (event, button) => {
+                        const rect = button.rect;
+                        new Menu({ left: rect.right - 200, top: rect.bottom }).appendTo(BodyNode);
+                    },
                 }),
             ),
             this.content = el("main"),

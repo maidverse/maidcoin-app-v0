@@ -174,6 +174,35 @@ a {
   background-color: #dfdcd7;
   border: 1px solid #363138;
   color: #363138;
+  width: 200px;
+}
+.menu .menu-item {
+  display: block;
+  padding: 10px 0;
+  text-align: center;
+}
+.farm-list > .total-count {
+  text-align: right;
+  color: #564f5b;
+}
+.farm-list > .farm-container {
+  margin-left: -20px;
+  width: calc(100% + 20px);
+}
+.farm-list > .farm-container:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.farm-list > .farm-container > .maid-corp,
+.farm-list > .farm-container > .clone-nurse {
+  float: left;
+  width: calc(50% - 20px);
+  margin-left: 20px;
+  margin-top: 20px;
 }
 .maid-list > .total-count {
   text-align: right;
@@ -279,11 +308,30 @@ a {
   color: #dfdcd7;
   font-size: 30px;
 }
+.nurse-raid-list > .current-block {
+  float: left;
+}
 .nurse-raid-list > .total-count {
-  text-align: right;
+  float: right;
   color: #564f5b;
 }
+.nurse-raid-list > .raid-container {
+  clear: both;
+  margin-left: -20px;
+  width: calc(100% + 20px);
+}
+.nurse-raid-list > .raid-container:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
 .nurse-raid-list > .raid-container > .nurse-raid {
+  float: left;
+  width: calc(50% - 20px);
+  margin-left: 20px;
   margin-top: 20px;
 }
 .nurse-raid {
@@ -294,19 +342,27 @@ a {
   text-align: right;
   color: #564f5b;
 }
+.nurse-factory-list > .factory-container {
+  margin-left: -20px;
+  width: calc(100% + 20px);
+}
+.nurse-factory-list > .factory-container:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
 .nurse-factory-list > .factory-container > .nurse-factory {
+  float: left;
+  width: calc(50% - 20px);
+  margin-left: 20px;
   margin-top: 20px;
 }
 .nurse-factory {
   padding: 20px;
   background-color: #bcb5bc;
-}
-.clone-nurse-list > .total-count {
-  text-align: right;
-  color: #564f5b;
-}
-.clone-nurse-list > .clone-nurse-container > .clone-nurse {
-  margin-top: 20px;
 }
 #layout {
   padding-top: 64px;
@@ -342,14 +398,14 @@ a {
   padding: 12px;
 }
 #layout > main {
-  width: 720px;
+  width: 920px;
   margin: auto;
 }
 #layout > footer {
   border-top: 1px solid #bcb5bc;
   color: #564f5b;
   padding: 20px 0;
-  width: 720px;
+  width: 920px;
   margin: auto;
   margin-top: 20px;
   text-align: right;
@@ -412,7 +468,11 @@ a {
   color: #564f5b;
 }
 #nurse > .nurse-raid-list {
+  margin-top: 30px;
   margin-bottom: 50px;
+}
+#nurse > .nurse-factory-list {
+  margin-top: 30px;
 }
 #earn {
   padding: 60px 0;
@@ -425,6 +485,9 @@ a {
 }
 #earn > p {
   color: #564f5b;
+}
+#earn > .farm-list {
+  margin-top: 30px;
 }
 #admin {
   padding: 60px 0;

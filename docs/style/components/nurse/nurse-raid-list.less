@@ -1,12 +1,24 @@
 .nurse-raid-list {
+    >.current-block {
+        float: left;
+    }
+
     >.total-count {
-        text-align: right;
-        color     : #564f5b;
+        float: right;
+        color: #564f5b;
     }
 
     >.raid-container {
+        clear      : both;
+        margin-left: -20px;
+        width      : calc(100% + 20px);
+        .float-wrapper();
+
         >.nurse-raid {
-            margin-top: 20px;
+            float      : left;
+            width      : calc(50% - 20px);
+            margin-left: 20px;
+            margin-top : 20px;
         }
     }
 }

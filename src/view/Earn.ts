@@ -1,7 +1,7 @@
 import { DomNode, el } from "@hanul/skynode";
 import { View } from "skyrouter";
 import { ViewParams } from "skyrouter/lib/View";
-import CloneNurseList from "../component/nurse/CloneNurseList";
+import FarmList from "../component/FarmList";
 import Layout from "./Layout";
 
 export default class Earn implements View {
@@ -12,7 +12,7 @@ export default class Earn implements View {
         Layout.current.content.append(this.container = el("#earn",
             el("h2", "Earn"),
             el("p", "Earn MaidCoin!"),
-            new CloneNurseList(),
+            new FarmList(),
         ));
     }
 
