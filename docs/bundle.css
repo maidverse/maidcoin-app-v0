@@ -229,7 +229,8 @@ a {
   visibility: hidden;
 }
 .maid-corp > .control > .deposit-button,
-.maid-corp > .control > .withdraw-button {
+.maid-corp > .control > .withdraw-button,
+.maid-corp > .control > .claim-button {
   float: left;
   margin-left: 10px;
   background-color: #dfdcd7;
@@ -239,7 +240,8 @@ a {
   border-radius: 50px;
 }
 .maid-corp > .control > .deposit-button:hover,
-.maid-corp > .control > .withdraw-button:hover {
+.maid-corp > .control > .withdraw-button:hover,
+.maid-corp > .control > .claim-button:hover {
   background-color: #363138;
   color: #dfdcd7;
 }
@@ -581,7 +583,8 @@ a {
   visibility: hidden;
 }
 .clone-nurse > .info > .control > .support-button,
-.clone-nurse > .info > .control > .desupport-button {
+.clone-nurse > .info > .control > .desupport-button,
+.clone-nurse > .info > .control > .claim-button {
   float: right;
   background-color: #dfdcd7;
   border: 1px solid #363138;
@@ -590,7 +593,8 @@ a {
   border-radius: 50px;
 }
 .clone-nurse > .info > .control > .support-button:hover,
-.clone-nurse > .info > .control > .desupport-button:hover {
+.clone-nurse > .info > .control > .desupport-button:hover,
+.clone-nurse > .info > .control > .claim-button:hover {
   background-color: #363138;
   color: #dfdcd7;
 }

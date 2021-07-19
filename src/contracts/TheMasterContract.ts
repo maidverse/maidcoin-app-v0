@@ -56,6 +56,10 @@ class TheMasterContract extends Contract<TheMaster> {
         return amount;
     }
 
+    public async getPendingReward(pid: BigNumberish, user: string) {
+        return await this.contract.pendingReward(pid, user);
+    }
+
     public async support(pid: BigNumberish, lpTokenAmount: BigNumberish, supportTo: BigNumberish) {
 
         const contract = await this.loadWalletContract();
@@ -87,6 +91,42 @@ class TheMasterContract extends Contract<TheMaster> {
     public async desupport(pid: BigNumberish, lpTokenAmount: BigNumberish) {
         const contract = await this.loadWalletContract();
         await contract?.desupport(pid, lpTokenAmount);
+    }
+
+    public async deposit(pid: BigNumberish, lpTokenAmount: BigNumberish) {
+
+        const contract = await this.loadWalletContract();
+        const owner = await Wallet.loadAddress();
+        if (contract !== undefined && owner !== undefined) {
+
+            if (await LPTokenContract.allowance(owner, this.address) < lpTokenAmount) {
+
+                const deadline = Math.ceil(Date.now() / 1000) + 1000000;
+                const signed = await Wallet.signERC20Permit(
+
+                    await LPTokenContract.getName(),
+                    "1",
+                    LPTokenContract.address,
+
+                    this.address,
+                    lpTokenAmount,
+                    await LPTokenContract.getNonce(owner),
+                    deadline,
+                );
+
+                await contract.depositWithPermit(pid, lpTokenAmount, owner, deadline, signed.v, signed.r, signed.s);
+            } else {
+                await contract.deposit(pid, lpTokenAmount, owner);
+            }
+        }
+    }
+
+    public async withdraw(pid: BigNumberish, lpTokenAmount: BigNumberish) {
+        const contract = await this.loadWalletContract();
+        const owner = await Wallet.loadAddress();
+        if (contract !== undefined && owner !== undefined) {
+            await contract.withdraw(pid, lpTokenAmount, owner);
+        }
     }
 }
 

@@ -8,6 +8,7 @@ export interface MaidInfo {
 declare class MaidContract extends ERC721Contract<Maid> {
     constructor();
     getMaid(maidId: number): Promise<MaidInfo>;
+    ownerOf(nurseId: number): Promise<string>;
     mint(power: BigNumberish): Promise<void>;
     support(id: BigNumberish, lpTokenAmount: BigNumberish): Promise<void>;
 }

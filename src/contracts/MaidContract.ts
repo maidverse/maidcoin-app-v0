@@ -26,6 +26,10 @@ class MaidContract extends ERC721Contract<Maid> {
         };
     }
 
+    public async ownerOf(nurseId: number): Promise<string> {
+        return await this.contract.ownerOf(nurseId);
+    }
+
     public async mint(power: BigNumberish) {
         const contract = await this.loadWalletContract();
         await contract?.mint(power);

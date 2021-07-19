@@ -45,6 +45,10 @@ class CloneNurseContract extends ERC721Contract<CloneNurse> {
         };
     }
 
+    public async ownerOf(nurseId: number): Promise<string> {
+        return await this.contract.ownerOf(nurseId);
+    }
+
     public async getNurse(nurseId: number): Promise<NurseInfo> {
         const nurseType = await this.contract.nurses(nurseId);
         return {
@@ -58,6 +62,10 @@ class CloneNurseContract extends ERC721Contract<CloneNurse> {
 
     public async getSupportingTo(supporter: string): Promise<BigNumber> {
         return await this.contract.supportingTo(supporter);
+    }
+
+    public async getPendigReward(nurseId: BigNumberish): Promise<BigNumber> {
+        return await this.contract.pendingReward(nurseId);
     }
 
     public async assemble(nurseType: number) {
@@ -90,6 +98,11 @@ class CloneNurseContract extends ERC721Contract<CloneNurse> {
                 await contract.assemble(nurseType);
             }
         }
+    }
+
+    public async claim(nurseId: BigNumberish) {
+        const contract = await this.loadWalletContract();
+        await contract?.claim(nurseId);
     }
 }
 

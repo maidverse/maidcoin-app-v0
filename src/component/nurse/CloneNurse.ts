@@ -16,6 +16,7 @@ export default class CloneNurse extends DomNode {
     private async load() {
 
         const nurse = await CloneNurseContract.getNurse(this.nurseId);
+        const nurseOwner = await CloneNurseContract.ownerOf(this.nurseId);
 
         const result = await superagent.post(`https://api.maidcoin.org/clonenurse/${this.nurseId}`);
         const tokenInfo = result.body;
@@ -25,6 +26,7 @@ export default class CloneNurse extends DomNode {
             el("img.image", { src: tokenInfo.image }),
             el(".info",
                 el(".property", `Clone Nurse #${this.nurseId}`),
+                el(".property", `Owner: ${nurseOwner}`),
                 el(".property", `Type: ${nurse.nurseType}`),
                 el(".property", `Supported Power: ${utils.formatEther(await CloneNurseContract.getSupportedPower(this.nurseId))}`),
                 control = el(".control"),
@@ -33,6 +35,14 @@ export default class CloneNurse extends DomNode {
 
         const owner = await Wallet.loadAddress();
         if (owner !== undefined) {
+
+            if (owner === nurseOwner) {
+                el("a.claim-button", `Claim ${utils.formatEther(await CloneNurseContract.getPendigReward(this.nurseId))} $MAID`, {
+                    click: async () => {
+                        await CloneNurseContract.claim(this.nurseId);
+                    },
+                }).appendTo(control);
+            }
 
             const supportingAmount = await TheMasterContract.getSupportingAmount(owner);
             const supportingTo = (await CloneNurseContract.getSupportingTo(owner)).toNumber();
@@ -53,6 +63,11 @@ export default class CloneNurse extends DomNode {
                         if (amount) {
                             await TheMasterContract.desupport(3, utils.parseEther(amount));
                         }
+                    },
+                }).appendTo(control);
+                el("a.claim-button", `Supporter Claim ${utils.formatEther(await TheMasterContract.getPendingReward(3, owner))} $MAID`, {
+                    click: async () => {
+                        await TheMasterContract.support(3, 0, this.nurseId);
                     },
                 }).appendTo(control);
             }
