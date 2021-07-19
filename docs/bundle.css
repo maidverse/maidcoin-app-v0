@@ -292,6 +292,14 @@ a {
   color: #dfdcd7;
   padding: 50px;
 }
+.maid-detail > .content > .info:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
 .maid-detail > .content > .info > h4 {
   font-weight: bold;
   font-size: 30px;
@@ -299,6 +307,10 @@ a {
 }
 .maid-detail > .content > .info > .property {
   margin-top: 5px;
+}
+.maid-detail > .content > .info .voice-button {
+  margin-top: 15px;
+  float: left;
 }
 .maid-detail > .close-button {
   position: absolute;

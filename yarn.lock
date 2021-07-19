@@ -719,6 +719,11 @@
     eventcontainer "^0.0.4"
     skyutil "^0.0.7"
 
+"@hanul/waiter@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@hanul/waiter/-/waiter-0.0.1.tgz#f52cd7f6b65ae225d20c2b678b706e90b42239ab"
+  integrity sha512-VdnAFO1qy16aMRXKkvbSH0memzo2zZ9YgDW1NW+gnPBD13e1e0/xwWFRccU6FR9z4F2Bh3DgH4MtHtj4zqebaA==
+
 "@json-rpc-tools/types@^1.6.1":
   version "1.7.6"
   resolved "https://registry.yarnpkg.com/@json-rpc-tools/types/-/types-1.7.6.tgz#5abd5fde01364a130c46093b501715bcce5bdc0e"
