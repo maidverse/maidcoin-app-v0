@@ -4,12 +4,12 @@ import Config from "../Config";
 
 class NetworkProvider extends EventContainer {
 
-    public provider: ethers.providers.JsonRpcProvider;
+    public provider: ethers.providers.WebSocketProvider;
     public signer: ethers.providers.JsonRpcSigner;
 
     constructor() {
         super();
-        this.provider = new ethers.providers.JsonRpcProvider(Config.rpc);
+        this.provider = new ethers.providers.WebSocketProvider(Config.endpoint);
         this.signer = this.provider.getSigner(ethers.constants.AddressZero);
     }
 
