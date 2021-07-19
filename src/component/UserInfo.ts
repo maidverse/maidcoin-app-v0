@@ -1,5 +1,6 @@
 import { DomNode, el } from "@hanul/skynode";
 import { BigNumber, utils } from "ethers";
+import CommonUtil from "../CommonUtil";
 import MaidCoinContract from "../contracts/MaidCoinContract";
 import Wallet from "../ethereum/Wallet";
 
@@ -11,8 +12,8 @@ export default class UserInfo extends DomNode {
     constructor() {
         super(".user-info");
         this.append(
-            this.userInfo = el(".user-info", "Loading..."),
             this.maidCoinInfo = el(".maid-coin"),
+            this.userInfo = el(".user-info"),
         );
 
         this.loadUserInfo();
@@ -44,7 +45,7 @@ export default class UserInfo extends DomNode {
             );
         } else {
             this.userInfo.empty().append(
-                el(".address", owner),
+                el(".address", CommonUtil.shortenAddress(owner)),
             );
         }
     }
@@ -54,7 +55,7 @@ export default class UserInfo extends DomNode {
         if (owner !== undefined) {
             const balance = await MaidCoinContract.balanceOf(owner);
             this.maidCoinInfo.empty().append(
-                el(".balance", `Your Balance: ${utils.formatEther(balance)}`),
+                el(".balance", `${utils.formatEther(balance)} $MAID`),
             );
         }
     }

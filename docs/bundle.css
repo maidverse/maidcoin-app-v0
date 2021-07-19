@@ -204,6 +204,32 @@ a {
   margin-left: 20px;
   margin-top: 20px;
 }
+.user-info {
+  display: flex;
+}
+.user-info > .connect-button {
+  border: 1px solid #dfdcd7;
+  color: #dfdcd7;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+.user-info > .connect-button:hover {
+  background-color: #dfdcd7;
+  color: #363138 !important;
+}
+.user-info > .maid-coin {
+  border: 1px solid #dfdcd7;
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  line-height: 38px;
+  padding: 0 10px;
+}
+.user-info > .user-info {
+  border: 1px solid #dfdcd7;
+  border-radius: 0 10px 10px 0;
+  line-height: 38px;
+  padding: 0 10px;
+}
 .maid-list > .total-count {
   text-align: right;
   color: #564f5b;
