@@ -211,8 +211,37 @@ a {
   background-position: left center;
   background-repeat: no-repeat;
   height: 200px;
-  cursor: pointer;
   padding: 20px 20px 20px 180px;
+  position: relative;
+}
+.maid-corp > .control {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 20px;
+}
+.maid-corp > .control:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.maid-corp > .control > .deposit-button,
+.maid-corp > .control > .withdraw-button {
+  float: left;
+  margin-left: 10px;
+  background-color: #dfdcd7;
+  border: 1px solid #363138;
+  color: #363138;
+  padding: 10px 20px;
+  border-radius: 50px;
+}
+.maid-corp > .control > .deposit-button:hover,
+.maid-corp > .control > .withdraw-button:hover {
+  background-color: #363138;
+  color: #dfdcd7;
 }
 .user-info {
   display: flex;

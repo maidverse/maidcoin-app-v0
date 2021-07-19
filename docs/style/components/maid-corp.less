@@ -5,6 +5,30 @@
     background-position: left center;
     background-repeat  : no-repeat;
     height             : 200px;
-    cursor             : pointer;
     padding            : 20px 20px 20px 180px;
+    position           : relative;
+
+    >.control {
+        position: absolute;
+        bottom  : 0;
+        right   : 0;
+        padding : 10px 20px;
+        .float-wrapper();
+
+        >.deposit-button,
+        >.withdraw-button {
+            float           : left;
+            margin-left     : 10px;
+            background-color: #dfdcd7;
+            border          : 1px solid #363138;
+            color           : #363138;
+            padding         : 10px 20px;
+            border-radius   : 50px;
+
+            &:hover {
+                background-color: #363138;
+                color           : #dfdcd7;
+            }
+        }
+    }
 }

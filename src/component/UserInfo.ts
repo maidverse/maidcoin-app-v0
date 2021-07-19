@@ -8,13 +8,21 @@ export default class UserInfo extends DomNode {
 
     private userInfo: DomNode;
     private maidCoinInfo: DomNode;
+    private connectButton: DomNode;
 
     constructor() {
         super(".user-info");
         this.append(
             this.maidCoinInfo = el(".maid-coin"),
             this.userInfo = el(".user-info"),
+            this.connectButton = el("a.connect-button", "Connect", {
+                click: () => Wallet.connect(),
+            }),
         );
+
+        this.maidCoinInfo.style({ display: "none" });
+        this.userInfo.style({ display: "none" });
+        this.connectButton.style({ display: "none" });
 
         this.loadUserInfo();
         this.loadMaidCoin();
@@ -38,12 +46,17 @@ export default class UserInfo extends DomNode {
     private async loadUserInfo() {
         const owner = await Wallet.loadAddress();
         if (owner === undefined) {
-            this.userInfo.empty().append(
-                el("a.connect-button", "Connect", {
-                    click: () => Wallet.connect(),
-                }),
-            );
+
+            this.maidCoinInfo.style({ display: "none" });
+            this.userInfo.style({ display: "none" });
+            this.connectButton.style({ display: "block" });
+
         } else {
+
+            this.maidCoinInfo.style({ display: "block" });
+            this.userInfo.style({ display: "block" });
+            this.connectButton.style({ display: "none" });
+
             this.userInfo.empty().append(
                 el(".address", CommonUtil.shortenAddress(owner)),
             );
