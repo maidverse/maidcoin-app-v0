@@ -17,6 +17,7 @@ export default class NurseFactory extends DomNode {
             const nurseType = await CloneNurseContract.getNurseType(this.nurseType);
             const balance = await NursePartContract.balanceOf(owner, this.nurseType);
             this.empty().append(
+                el("img.image", { src: `https://storage.googleapis.com/maidcoin/NursePart/${this.nurseType}.png` }),
                 el(".info",
                     el(".property", `Nurse Part #${this.nurseType}`),
                     el(".property", `Balance: ${balance}`),
