@@ -20,6 +20,11 @@ class CloneNurseContract extends ERC721Contract<CloneNurse> {
 
     constructor() {
         super(Config.contracts.CloneNurse, CloneNurseArtifact.abi, [
+            "Claim",
+            "SupportTo",
+            "ChangeSupportingRoute",
+            "ChangeSupportedPower",
+            "TransferSupportingRewards",
         ]);
     }
 

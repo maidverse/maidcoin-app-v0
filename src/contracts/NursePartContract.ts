@@ -6,8 +6,7 @@ import { NursePart } from "./typechain";
 class NursePartContract extends ERC1155Contract<NursePart> {
 
     constructor() {
-        super(Config.contracts.NursePart, NursePartArtifact.abi, [
-        ]);
+        super(Config.contracts.NursePart, NursePartArtifact.abi, []);
     }
 }
 

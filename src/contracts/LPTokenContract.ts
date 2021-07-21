@@ -6,8 +6,7 @@ import { UniswapV2ERC20 } from "./typechain";
 class LPTokenContract extends ERC20Contract<UniswapV2ERC20> {
 
     constructor() {
-        super(Config.contracts.LPToken, UniswapV2ERC20Artifact.abi, [
-        ]);
+        super(Config.contracts.LPToken, UniswapV2ERC20Artifact.abi, []);
     }
 }
 

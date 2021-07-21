@@ -6,8 +6,7 @@ import { MasterCoin } from "./typechain";
 class MasterCoinContract extends ERC20Contract<MasterCoin> {
 
     constructor() {
-        super(Config.contracts.MasterCoin, MasterCoinArtifact.abi, [
-        ]);
+        super(Config.contracts.MasterCoin, MasterCoinArtifact.abi, []);
     }
 }
 

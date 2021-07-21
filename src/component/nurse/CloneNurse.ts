@@ -1,17 +1,53 @@
 import { DomNode, el } from "@hanul/skynode";
-import { utils } from "ethers";
+import { BigNumber, utils } from "ethers";
 import superagent from "superagent";
+import CommonUtil from "../../CommonUtil";
 import CloneNurseContract from "../../contracts/CloneNurseContract";
 import TheMasterContract from "../../contracts/TheMasterContract";
 import Wallet from "../../ethereum/Wallet";
 
 export default class CloneNurse extends DomNode {
 
+    private reward: DomNode | undefined;
+    private supportedPower: DomNode | undefined;
+    private supporterReward: DomNode | undefined;
+
     constructor(private nurseId: number) {
         super(".clone-nurse");
         this.append(el(".loading", "Loading..."));
         this.load();
+        CloneNurseContract.on("Claim", this.claimHandler);
+        CloneNurseContract.on("ChangeSupportedPower", this.changeSupportedPowerHandler);
+        TheMasterContract.on("Support", this.supportHandler);
+        TheMasterContract.on("Desupport", this.desupportHandler);
     }
+
+    private claimHandler = async (id: BigNumber, claimer: string, reward: BigNumber) => {
+        if (id.eq(this.nurseId) === true) {
+            this.reward?.appendText("Reward: 0 $MAID");
+        }
+    };
+
+    private changeSupportedPowerHandler = async (id: BigNumber, power: BigNumber) => {
+        if (id.eq(this.nurseId) === true) {
+            this.reward?.appendText("Reward: 0 $MAID");
+            this.supportedPower?.appendText(`Supported Power: ${utils.formatEther(power)}`);
+        }
+    };
+
+    private supportHandler = async (supporter: string, pid: BigNumber) => {
+        const owner = await Wallet.loadAddress();
+        if (owner === supporter && pid.eq(3) === true) {
+            this.supporterReward?.appendText("Supporter Reward: 0 $MAID");
+        }
+    };
+
+    private desupportHandler = async (supporter: string, pid: BigNumber) => {
+        const owner = await Wallet.loadAddress();
+        if (owner === supporter && pid.eq(3) === true) {
+            this.supporterReward?.appendText("Supporter Reward: 0 $MAID");
+        }
+    };
 
     private async load() {
 
@@ -22,20 +58,22 @@ export default class CloneNurse extends DomNode {
         const tokenInfo = result.body;
 
         let control;
-        let reward;
-        let supporterReward;
         this.empty().append(
             el("img.image", { src: tokenInfo.image }),
             el(".info",
                 el(".property", `Clone Nurse #${this.nurseId}`),
-                el(".property", `Owner: ${nurseOwner}`),
+                el(".property", `Owner: ${CommonUtil.shortenAddress(nurseOwner)}`),
                 el(".property", `Type: ${nurse.nurseType}`),
-                el(".property", `Supported Power: ${utils.formatEther(await CloneNurseContract.getSupportedPower(this.nurseId))}`),
-                reward = el(".property"),
-                supporterReward = el(".property"),
+                this.supportedPower = el(".property", `Supported Power: ${utils.formatEther(await CloneNurseContract.getSupportedPower(this.nurseId))}`),
+                this.reward = el(".property"),
+                this.supporterReward = el(".property"),
                 control = el(".control"),
             ),
         );
+
+        this.supportedPower.on("delete", () => this.supportedPower = undefined);
+        this.reward.on("delete", () => this.reward = undefined);
+        this.supporterReward.on("delete", () => this.supporterReward = undefined);
 
         const owner = await Wallet.loadAddress();
         if (owner !== undefined) {
@@ -47,7 +85,7 @@ export default class CloneNurse extends DomNode {
                     },
                 }).appendTo(control);
 
-                reward.appendText(`Reward: ${utils.formatEther(await CloneNurseContract.getPendigReward(this.nurseId))} $MAID`);
+                this.reward.appendText(`Reward: ${utils.formatEther(await CloneNurseContract.getPendigReward(this.nurseId))} $MAID`);
             }
 
             const supportingAmount = await TheMasterContract.getSupportingAmount(owner);
@@ -76,9 +114,17 @@ export default class CloneNurse extends DomNode {
                         await TheMasterContract.support(3, 0, this.nurseId);
                     },
                 }).appendTo(control);
-                
-                reward.appendText(`Supporter Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(3, owner))} $MAID`);
+
+                this.reward.appendText(`Supporter Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(3, owner))} $MAID`);
             }
         }
+    }
+
+    public delete(): void {
+        CloneNurseContract.off("Claim", this.claimHandler);
+        CloneNurseContract.off("ChangeSupportedPower", this.changeSupportedPowerHandler);
+        TheMasterContract.off("Support", this.supportHandler);
+        TheMasterContract.off("Desupport", this.desupportHandler);
+        super.delete();
     }
 }

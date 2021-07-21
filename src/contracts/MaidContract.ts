@@ -15,6 +15,9 @@ class MaidContract extends ERC721Contract<Maid> {
 
     constructor() {
         super(Config.contracts.Maid, MaidArtifact.abi, [
+            "ChangeLPTokenToMaidPower",
+            "Support",
+            "Desupport",
         ]);
     }
 

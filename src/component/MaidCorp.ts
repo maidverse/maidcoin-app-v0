@@ -1,5 +1,5 @@
 import { DomNode, el } from "@hanul/skynode";
-import { utils } from "ethers";
+import { BigNumber, utils } from "ethers";
 import TheMasterContract from "../contracts/TheMasterContract";
 import Wallet from "../ethereum/Wallet";
 
@@ -33,7 +33,18 @@ export default class MaidCorp extends DomNode {
             ),
         );
         this.load();
+        TheMasterContract.on("Deposit", this.depositHandler);
     }
+
+    private depositHandler = async (userId: BigNumber, pid: BigNumber) => {
+        const owner = await Wallet.loadAddress();
+        if (
+            owner?.toLowerCase() === userId.toHexString().toLowerCase() &&
+            pid.eq(1) === true
+        ) {
+            this.reward.appendText("Reward: 0 $MAID");
+        }
+    };
 
     private async load() {
         const owner = await Wallet.loadAddress();
@@ -46,5 +57,10 @@ export default class MaidCorp extends DomNode {
 
             this.reward.appendText(`Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(1, owner))} $MAID`);
         }
+    }
+
+    public delete(): void {
+        TheMasterContract.off("Deposit", this.depositHandler);
+        super.delete();
     }
 }

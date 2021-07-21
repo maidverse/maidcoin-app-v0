@@ -21,6 +21,16 @@ class TheMasterContract extends Contract<TheMaster> {
 
     constructor() {
         super(Config.contracts.TheMaster, TheMasterArtifact.abi, [
+            "ChangeRewardCalculator",
+            "Add",
+            "Set",
+            "Deposit",
+            "Withdraw",
+            "EmergencyWithdraw",
+            "Support",
+            "Desupport",
+            "EmergencyDesupport",
+            "SetIsSupporterPool",
         ]);
     }
 

@@ -6,8 +6,7 @@ import { MaidCoin } from "./typechain";
 class MaidCoinContract extends ERC20Contract<MaidCoin> {
 
     constructor() {
-        super(Config.contracts.MaidCoin, MaidCoinArtifact.abi, [
-        ]);
+        super(Config.contracts.MaidCoin, MaidCoinArtifact.abi, []);
     }
 }
 

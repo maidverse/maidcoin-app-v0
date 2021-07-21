@@ -24,6 +24,10 @@ class NurseRaidContract extends Contract<NurseRaid> {
 
     constructor() {
         super(Config.contracts.NurseRaid, NurseRaidArtifact.abi, [
+            "Create",
+            "Enter",
+            "Exit",
+            "ChangeMaidPowerToRaidReducedBlock",
         ]);
     }
 
