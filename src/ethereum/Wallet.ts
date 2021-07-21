@@ -23,7 +23,7 @@ class Wallet extends EventContainer {
                 this.fireEvent("chainchange", BigNumber.from(chainId).toNumber());
             });
         } else {
-            this.walletConnectProvider = new WalletConnectProvider({ rpc: Config.rpc });
+            this.walletConnectProvider = new WalletConnectProvider({ infuraId: Config.infuraId });
             this.provider = new ethers.providers.Web3Provider(this.walletConnectProvider);
             this.walletConnectProvider.on("chainChanged", (chainId: number) => {
                 this.fireEvent("chainchange", chainId);
