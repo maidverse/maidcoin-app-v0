@@ -608,6 +608,9 @@ a {
 #layout > header > .sub {
   display: flex;
 }
+#layout > header > .main {
+  flex-grow: 1;
+}
 #layout > header img.logo {
   display: block;
   height: 36px;
