@@ -9,6 +9,7 @@ export default class Layout implements View {
     public static current: Layout;
 
     private container: DomNode;
+    private menuButton: DomNode;
     private nav: DomNode;
     public content: DomNode;
 
@@ -22,8 +23,8 @@ export default class Layout implements View {
                     el("h1",
                         el("a", el("img.logo", { src: "/images/logo.png" }), { click: () => SkyRouter.go("/") }),
                     ),
-                    el("a.menu-button.fas.fa-bars", {
-                        click: (event, button) => {
+                    this.menuButton = el("a.menu-button.fas.fa-bars", {
+                        click: (event: MouseEvent, button) => {
                             if (this.showingNav === true) {
                                 this.nav.style({ display: "none" });
                                 button.deleteClass("fa-times");
@@ -34,6 +35,7 @@ export default class Layout implements View {
                                 button.addClass("fa-times");
                             }
                             this.showingNav = this.showingNav !== true;
+                            event.stopPropagation();
                         },
                     }),
                     this.nav = el("nav",
@@ -57,11 +59,23 @@ export default class Layout implements View {
             this.content = el("main"),
             el("footer", "All rights reserved, MaidCoin"),
         ));
+
+        BodyNode.onDom("click", this.bodyClickHandler);
     }
+
+    private bodyClickHandler = () => {
+        if (this.showingNav === true) {
+            this.nav.style({ display: "none" });
+            this.menuButton.deleteClass("fa-times");
+            this.menuButton.addClass("fa-bars");
+            this.showingNav = false;
+        }
+    };
 
     public changeParams(params: ViewParams, uri: string): void { }
 
     public close(): void {
         this.container.delete();
+        BodyNode.offDom("click", this.bodyClickHandler);
     }
 }
