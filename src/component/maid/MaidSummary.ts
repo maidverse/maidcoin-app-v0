@@ -29,11 +29,11 @@ export default class MaidSummary extends DomNode {
                 el(".control",
                     el("a.support-button", "Support", {
                         click: async (event: MouseEvent) => {
+                            event.stopPropagation();
                             const amount = prompt("How much amount to support?", "10");
                             if (amount) {
                                 await MaidContract.support(this.maidId, utils.parseEther(amount));
                             }
-                            event.stopPropagation();
                         },
                     }),
                 ),
