@@ -22,6 +22,8 @@ export default class CloneNurse extends DomNode {
         const tokenInfo = result.body;
 
         let control;
+        let reward;
+        let supporterReward;
         this.empty().append(
             el("img.image", { src: tokenInfo.image }),
             el(".info",
@@ -29,6 +31,8 @@ export default class CloneNurse extends DomNode {
                 el(".property", `Owner: ${nurseOwner}`),
                 el(".property", `Type: ${nurse.nurseType}`),
                 el(".property", `Supported Power: ${utils.formatEther(await CloneNurseContract.getSupportedPower(this.nurseId))}`),
+                reward = el(".property"),
+                supporterReward = el(".property"),
                 control = el(".control"),
             ),
         );
@@ -37,11 +41,13 @@ export default class CloneNurse extends DomNode {
         if (owner !== undefined) {
 
             if (owner === nurseOwner) {
-                el("a.claim-button", `Claim ${utils.formatEther(await CloneNurseContract.getPendigReward(this.nurseId))} $MAID`, {
+                el("a.claim-button", "Claim", {
                     click: async () => {
                         await CloneNurseContract.claim(this.nurseId);
                     },
                 }).appendTo(control);
+
+                reward.appendText(`Reward: ${utils.formatEther(await CloneNurseContract.getPendigReward(this.nurseId))} $MAID`);
             }
 
             const supportingAmount = await TheMasterContract.getSupportingAmount(owner);
@@ -65,11 +71,13 @@ export default class CloneNurse extends DomNode {
                         }
                     },
                 }).appendTo(control);
-                el("a.claim-button", `Supporter Claim ${utils.formatEther(await TheMasterContract.getPendingReward(3, owner))} $MAID`, {
+                el("a.claim-button", "Supporter Claim", {
                     click: async () => {
                         await TheMasterContract.support(3, 0, this.nurseId);
                     },
                 }).appendTo(control);
+                
+                reward.appendText(`Supporter Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(3, owner))} $MAID`);
             }
         }
     }

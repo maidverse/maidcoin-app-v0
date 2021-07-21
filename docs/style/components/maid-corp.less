@@ -8,17 +8,22 @@
     padding            : 20px 20px 20px 180px;
     position           : relative;
 
+    >h4 {
+        font-size    : 20px;
+        font-weight  : bold;
+        margin-bottom: 10px;
+    }
+
     >.control {
         position: absolute;
         bottom  : 0;
         right   : 0;
         padding : 10px 20px;
-        .float-wrapper();
+        display : flex;
 
         >.deposit-button,
         >.withdraw-button,
         >.claim-button {
-            float           : left;
             margin-left     : 10px;
             background-color: #dfdcd7;
             border          : 1px solid #363138;

@@ -163,6 +163,7 @@ input {
 body {
   background-color: #dfdcd7;
   font-family: "Inter var";
+  font-feature-settings: "ss01" on, "ss02" on, "cv01" on, "cv03" on;
 }
 a {
   color: inherit;
@@ -214,24 +215,21 @@ a {
   padding: 20px 20px 20px 180px;
   position: relative;
 }
+.maid-corp > h4 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 .maid-corp > .control {
   position: absolute;
   bottom: 0;
   right: 0;
   padding: 10px 20px;
-}
-.maid-corp > .control:after {
-  content: " ";
-  display: block;
-  font-size: 0;
-  height: 0;
-  clear: both;
-  visibility: hidden;
+  display: flex;
 }
 .maid-corp > .control > .deposit-button,
 .maid-corp > .control > .withdraw-button,
 .maid-corp > .control > .claim-button {
-  float: left;
   margin-left: 10px;
   background-color: #dfdcd7;
   border: 1px solid #363138;
@@ -573,19 +571,12 @@ a {
   bottom: 0;
   right: 0;
   padding: 10px 20px;
-}
-.clone-nurse > .info > .control:after {
-  content: " ";
-  display: block;
-  font-size: 0;
-  height: 0;
-  clear: both;
-  visibility: hidden;
+  display: flex;
 }
 .clone-nurse > .info > .control > .support-button,
 .clone-nurse > .info > .control > .desupport-button,
 .clone-nurse > .info > .control > .claim-button {
-  float: right;
+  margin-left: 10px;
   background-color: #dfdcd7;
   border: 1px solid #363138;
   color: #363138;
@@ -599,23 +590,31 @@ a {
   color: #dfdcd7;
 }
 #layout {
-  padding-top: 64px;
+  padding: 64px 0;
 }
 #layout > header {
   background-color: #363138;
   color: #ccc5c8;
   padding: 12px 16px;
-  display: flex;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 998;
+  display: flex;
+  height: 64px;
+}
+#layout > header > .main,
+#layout > header > .sub {
+  display: flex;
 }
 #layout > header img.logo {
   display: block;
   height: 36px;
   margin-right: 16px;
+}
+#layout > header > .main .menu-button {
+  display: none;
 }
 #layout > header a:hover {
   color: #fff;
@@ -631,9 +630,51 @@ a {
 #layout > header .more-button {
   padding: 12px;
 }
+@media only screen and (max-width: 959px) {
+  #layout > header > .sub {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 12px 16px;
+    height: 64px;
+    background-color: #363138;
+    justify-content: flex-end;
+  }
+}
+@media only screen and (max-width: 719px) {
+  #layout > header > .main .menu-button {
+    position: fixed;
+    right: 10px;
+    top: 12px;
+    padding: 10px;
+    font-size: 20px;
+    display: block;
+  }
+  #layout > header nav {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #363138;
+    display: none;
+  }
+  #layout > header nav > a {
+    display: block;
+  }
+  #layout > header > .sub {
+    padding: 12px !important;
+  }
+}
 #layout > main {
   width: 920px;
   margin: auto;
+}
+@media only screen and (max-width: 959px) {
+  #layout > main {
+    width: calc(100% - 40px);
+  }
 }
 #layout > footer {
   border-top: 1px solid #bcb5bc;
@@ -643,6 +684,11 @@ a {
   margin: auto;
   margin-top: 20px;
   text-align: right;
+}
+@media only screen and (max-width: 959px) {
+  #layout > footer {
+    width: calc(100% - 40px);
+  }
 }
 #home {
   padding: 60px 0;

@@ -1,21 +1,31 @@
 #layout {
-    padding-top: 64px;
+    padding: 64px 0;
 
     >header {
         background-color: #363138;
         color           : #ccc5c8;
         padding         : 12px 16px;
-        display         : flex;
         position        : fixed;
         top             : 0;
         left            : 0;
         width           : 100%;
         z-index         : 998;
+        display         : flex;
+        height          : 64px;
+
+        >.main,
+        >.sub {
+            display: flex;
+        }
 
         img.logo {
             display     : block;
             height      : 36px;
             margin-right: 16px;
+        }
+
+        >.main .menu-button {
+            display: none;
         }
 
         a:hover {
@@ -35,11 +45,57 @@
         .more-button {
             padding: 12px;
         }
+
+        @media @tablet-and-phone {
+            >.sub {
+                position        : fixed;
+                left            : 0;
+                bottom          : 0;
+                width           : 100%;
+                padding         : 12px 16px;
+                height          : 64px;
+                background-color: #363138;
+                justify-content : flex-end;
+            }
+        }
+
+        @media @phone {
+            >.main .menu-button {
+                position : fixed;
+                right    : 10px;
+                top      : 12px;
+                padding  : 10px;
+                font-size: 20px;
+                display  : block;
+            }
+
+            nav {
+                position        : fixed;
+                left            : 0;
+                top             : 64px;
+                width           : 100%;
+                padding         : 12px 16px;
+                background-color: #363138;
+                display         : none;
+
+                >a {
+                    display: block;
+                }
+            }
+
+            >.sub {
+                padding: 12px !important;
+            }
+        }
     }
 
     >main {
         width : 920px;
         margin: auto;
+
+        @media @tablet-and-phone {
+            width: calc(100% - 40px);
+        }
     }
 
     >footer {
@@ -50,5 +106,9 @@
         margin    : auto;
         margin-top: 20px;
         text-align: right;
+
+        @media @tablet-and-phone {
+            width: calc(100% - 40px);
+        }
     }
 }

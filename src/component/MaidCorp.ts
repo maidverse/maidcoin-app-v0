@@ -5,12 +5,14 @@ import Wallet from "../ethereum/Wallet";
 
 export default class MaidCorp extends DomNode {
 
+    private reward: DomNode;
     private control: DomNode;
 
     constructor() {
         super(".maid-corp");
         this.append(
             el("h4", "Maid Corporation"),
+            this.reward = el(".reward"),
             this.control = el(".control",
                 el("a.deposit-button", "Deposit", {
                     click: async () => {
@@ -36,11 +38,13 @@ export default class MaidCorp extends DomNode {
     private async load() {
         const owner = await Wallet.loadAddress();
         if (owner !== undefined) {
-            el("a.claim-button", `Claim ${utils.formatEther(await TheMasterContract.getPendingReward(1, owner))} $MAID`, {
+            el("a.claim-button", "Claim", {
                 click: async () => {
                     await TheMasterContract.deposit(1, 0);
                 },
             }).appendTo(this.control);
+
+            this.reward.appendText(`Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(1, owner))} $MAID`);
         }
     }
 }
