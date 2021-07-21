@@ -209,6 +209,12 @@ a {
   margin-left: 20px;
   margin-top: 20px;
 }
+@media only screen and (max-width: 719px) {
+  .farm-list > .farm-container > .maid-corp,
+  .farm-list > .farm-container > .clone-nurse {
+    width: calc(100% - 20px);
+  }
+}
 .maid-corp {
   background-color: #bcb5bc;
   background-image: url(/images/maidcorp.png);
@@ -415,6 +421,11 @@ a {
   margin-left: 20px;
   margin-top: 20px;
 }
+@media only screen and (max-width: 719px) {
+  .nurse-raid-list > .raid-container > .nurse-raid {
+    width: calc(100% - 20px);
+  }
+}
 .nurse-raid {
   background-color: #bcb5bc;
   display: flex;
@@ -491,6 +502,11 @@ a {
   width: calc(50% - 20px);
   margin-left: 20px;
   margin-top: 20px;
+}
+@media only screen and (max-width: 719px) {
+  .nurse-factory-list > .factory-container > .nurse-factory {
+    width: calc(100% - 20px);
+  }
 }
 .nurse-factory {
   background-color: #bcb5bc;
