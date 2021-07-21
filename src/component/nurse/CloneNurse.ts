@@ -24,28 +24,28 @@ export default class CloneNurse extends DomNode {
 
     private claimHandler = async (id: BigNumber, claimer: string, reward: BigNumber) => {
         if (id.eq(this.nurseId) === true) {
-            this.reward?.appendText("Reward: 0 $MAID");
+            this.reward?.empty().appendText("Reward: 0 $MAID");
         }
     };
 
     private changeSupportedPowerHandler = async (id: BigNumber, power: BigNumber) => {
         if (id.eq(this.nurseId) === true) {
-            this.reward?.appendText("Reward: 0 $MAID");
-            this.supportedPower?.appendText(`Supported Power: ${utils.formatEther(power)}`);
+            this.reward?.empty().appendText("Reward: 0 $MAID");
+            this.supportedPower?.empty().appendText(`Supported Power: ${utils.formatEther(power)}`);
         }
     };
 
     private supportHandler = async (supporter: string, pid: BigNumber) => {
         const owner = await Wallet.loadAddress();
         if (owner === supporter && pid.eq(3) === true) {
-            this.supporterReward?.appendText("Supporter Reward: 0 $MAID");
+            this.supporterReward?.empty().appendText("Supporter Reward: 0 $MAID");
         }
     };
 
     private desupportHandler = async (supporter: string, pid: BigNumber) => {
         const owner = await Wallet.loadAddress();
         if (owner === supporter && pid.eq(3) === true) {
-            this.supporterReward?.appendText("Supporter Reward: 0 $MAID");
+            this.supporterReward?.empty().appendText("Supporter Reward: 0 $MAID");
         }
     };
 
@@ -85,7 +85,7 @@ export default class CloneNurse extends DomNode {
                     },
                 }).appendTo(control);
 
-                this.reward.appendText(`Reward: ${utils.formatEther(await CloneNurseContract.getPendigReward(this.nurseId))} $MAID`);
+                this.reward.empty().appendText(`Reward: ${utils.formatEther(await CloneNurseContract.getPendigReward(this.nurseId))} $MAID`);
             }
 
             const supportingAmount = await TheMasterContract.getSupportingAmount(owner);
@@ -115,7 +115,7 @@ export default class CloneNurse extends DomNode {
                     },
                 }).appendTo(control);
 
-                this.reward.appendText(`Supporter Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(3, owner))} $MAID`);
+                this.reward.empty().appendText(`Supporter Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(3, owner))} $MAID`);
             }
         }
     }

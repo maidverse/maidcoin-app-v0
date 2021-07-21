@@ -42,7 +42,7 @@ export default class MaidCorp extends DomNode {
             owner?.toLowerCase() === userId.toHexString().toLowerCase() &&
             pid.eq(1) === true
         ) {
-            this.reward.appendText("Reward: 0 $MAID");
+            this.reward.empty().appendText("Reward: 0 $MAID");
         }
     };
 
@@ -55,7 +55,7 @@ export default class MaidCorp extends DomNode {
                 },
             }).appendTo(this.control);
 
-            this.reward.appendText(`Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(1, owner))} $MAID`);
+            this.reward.empty().appendText(`Reward: ${utils.formatEther(await TheMasterContract.getPendingReward(1, owner))} $MAID`);
         }
     }
 
